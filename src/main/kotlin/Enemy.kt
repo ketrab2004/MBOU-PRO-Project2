@@ -5,8 +5,8 @@ open class Enemy(
 
     public val health: Float = maxHealth;
 
-    public var inventory: List<Int> = listOf(); //TODO change List<Int> to List<Item>
+    public var inventory: List<Item> = listOf();
 
-    public var equipped: List<Int> = listOf(); //TODO change List<Int> to List<Item>
+    public var equipped: List<Item> = listOf();
 
 }

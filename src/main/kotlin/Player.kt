@@ -14,6 +14,14 @@ class Player(name: String, description: String, maxHealth: Float)
                 commandHelp(arguments)
             }
 
+            //Exit aliases
+            "exit" -> {
+                commandExit(arguments)
+            }
+            "leave" -> {
+                commandExit(arguments)
+            }
+
             //Inventory aliases
             "inventory" -> {
                 commandInventory(arguments)
@@ -35,17 +43,21 @@ class Player(name: String, description: String, maxHealth: Float)
 
 
             else -> {
-                println("⚠${arguments[0]} is not a known command")
+                println("⚠ '${arguments[0]}' is not a known command")
             }
         }
     }
 
     private fun commandHelp(args: List<String>){
-        val padding: Int = 25; //using padEnd add spaces to set a length, that way all the text lines up nicely
+        val padding: Int = 35; //using padEnd to add spaces to set a length, that way all the text lines up nicely
         println("Commands:")
-        println("* help;".padEnd(padding) + "Shows all commands you can do.")
-        println("* inventory, inv, items;".padEnd(padding) + "Shows your inventory.")
-        println("* room, look;".padEnd(padding) + "Inspect/look around the current room.")
+        println("* help".padEnd(padding)                   +"Shows all commands you can do.")
+        println("* exit, leave".padEnd(padding)            +"Closes the game.")
+        println("* inventory, inv, items".padEnd(padding)  +"Shows your inventory.")
+        println("* room, look".padEnd(padding)             +"Inspect/look around the current room.")
+    }
+    private fun commandExit(args: List<String>){
+        //TODO exit game
     }
     private fun commandInventory(args: List<String>){
     }

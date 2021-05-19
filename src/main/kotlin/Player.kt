@@ -4,7 +4,7 @@ class Player(name: String, description: String, maxHealth: Float)
     var currentRoom: Int = 2; //TODO change Int to room and etc
 
     /**
-     * Does a command based on the input
+     * Does a command based on the input [input]
      */
     public fun doCommand(input: String){
         val arguments: List<String> = input.split(" ");

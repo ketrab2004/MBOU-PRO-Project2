@@ -1,7 +1,7 @@
 class Player(name: String, description: String, maxHealth: Float)
     : Enemy(name, description, maxHealth) { //extends Enemy
 
-    var currentRoom: Int = 2; //TODO change Int to room and etc
+    lateinit var currentRoom: Room; //lateinit because it's null
 
     /**
      * Does a command based on the input [input]

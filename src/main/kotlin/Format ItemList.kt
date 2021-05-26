@@ -33,6 +33,7 @@ public fun formatItemList(itemList: List<Item>, title: String) : String{
     // (10, 3) = 3; (10, 24) = 10
 
     toReturn+= title.padEnd((longestItemName + extraLength) * itemsPerRow -1, '-') +"\n"; //top line with title
+    //subtract 1 because each item ends on " | " which has an extra space at the end which doesn't need a - above it
 
     itemList.forEachIndexed { index, element ->
         toReturn+= ("$index. " //number of item
@@ -48,6 +49,7 @@ public fun formatItemList(itemList: List<Item>, title: String) : String{
     }
 
     toReturn+= "\n".padEnd((longestItemName + extraLength) * itemsPerRow, '-'); //bottom line
+    //dont need to subtract 1 because "\n" is 1 character, so 1 is already subtracted (because it has no width)
 
     return toReturn;
 }

@@ -34,6 +34,7 @@ public fun formatPOIList(POIList: List<POI>, title: String) : String{
     // (10, 3) = 3; (10, 24) = 10
 
     toReturn+= title.padEnd((longestPOIName + extraLength) * POIsPerRow -1, '-') +"\n"; //top line with title
+    //subtract 1 because each item ends on " | " which has an extra space at the end which doesn't need a - above it
 
     POIList.forEachIndexed { index, element ->
         toReturn+= ("$index. " //number of POI
@@ -49,6 +50,7 @@ public fun formatPOIList(POIList: List<POI>, title: String) : String{
     }
 
     toReturn+= "\n".padEnd((longestPOIName + extraLength) * POIsPerRow, '-'); //bottom line
+    //dont need to subtract 1 because "\n" is 1 character, so 1 is already subtracted (because it has no width)
 
     return toReturn;
 }

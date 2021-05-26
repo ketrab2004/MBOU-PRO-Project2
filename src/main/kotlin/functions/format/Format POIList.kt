@@ -1,9 +1,13 @@
+package functions.format
+
+import classes.POI
+
 /**
  * Formats an [POIList] into a grid to display its contents.
  * Copy of [formatItemList]
  *
  * @param POIList A list of POIs to display.
- * @param title Title to show at the top of the POI grid, use "" if you don't want a title.
+ * @param title Title to show at the top of the Classes.POI grid, use "" if you don't want a title.
  * @return A string with line breaks, use println() to print it.
  * (only use print() if you know that the current line is empty)
  */
@@ -37,9 +41,9 @@ public fun formatPOIList(POIList: List<POI>, title: String) : String{
     //subtract 1 because each item ends on " | " which has an extra space at the end which doesn't need a - above it
 
     POIList.forEachIndexed { index, element ->
-        toReturn+= ("$index. " //number of POI
+        toReturn+= ("$index. " //number of Classes.POI
             .padEnd(numberLength) //add spaces to make it numberlength long
-                +element.name) //add name of POI
+                +element.name) //add name of Classes.POI
             .padEnd(longestPOIName + extraLength - 3) +" | "
         //add spaces so that combined text is longestPOIName + extraLength (which is number + numberLength)
         //subtract 3 because " | " is 3 long

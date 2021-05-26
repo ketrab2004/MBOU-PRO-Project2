@@ -1,3 +1,5 @@
+package classes
+
 enum class PossiblePOICommands {
     ENTER,
     OPEN,
@@ -6,7 +8,7 @@ enum class PossiblePOICommands {
     USE,
 }
 
-//TODO make inventory a Item class list
+//TODO make inventory a Classes.Item class list
 open class POI (val name: String,
                 val description: String,
                 val usableCommands : List<PossiblePOICommands> = listOf()){

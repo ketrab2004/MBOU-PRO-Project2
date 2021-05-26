@@ -1,3 +1,5 @@
+package classes
+
 enum class ItemCommands{
     CONSUME,
     EQUIP

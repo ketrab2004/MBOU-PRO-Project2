@@ -1,3 +1,8 @@
+package functions.doCommands
+
+import classes.POI
+import classes.PossiblePOICommands
+
 public fun doCommandPOI(input: String, POIClass: POI){
     val arguments: List<String> = input.split(" ");
 
@@ -65,7 +70,7 @@ private fun commandEnter(args: List<String>, POIClass: POI){
 }
 private fun commandOpen(args: List<String>, POIClass: POI){
     if(POIClass.usableCommands.contains(PossiblePOICommands.OPEN)) { //open is a usable command
-        // TODO open inventory of POI
+        // TODO open inventory of Classes.POI
     }else {
         println("You cannot open '${POIClass.name}'.")
     }

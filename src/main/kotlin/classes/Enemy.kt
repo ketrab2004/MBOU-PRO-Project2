@@ -1,3 +1,5 @@
+package classes
+
 open class Enemy(
     val name: String,
     val description: String,

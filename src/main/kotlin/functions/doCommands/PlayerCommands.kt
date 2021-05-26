@@ -1,3 +1,8 @@
+package functions.doCommands
+
+import classes.Player
+import functions.format.formatItemList
+
 /**
  * Does a command based on the input [input]
  */
@@ -28,7 +33,7 @@ public fun doPlayerCommand(input: String, plr: Player){
             commandInventory(arguments, plr)
         }
 
-        //Room aliases
+        //Classes.Room aliases
         "room" -> {
             commandRoom(arguments, plr)
         }

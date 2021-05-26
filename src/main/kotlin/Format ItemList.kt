@@ -30,9 +30,14 @@ fun formatItemList(itemList: List<Item>, title: String) : String{
     toReturn+= title.padEnd((longestItemName + extraLength) * itemsPerRow -1, '-') +"\n"; //top line with title
 
     itemList.forEachIndexed { index, element ->
-        toReturn+= ("$index. ".padEnd(numberLength)+ element.name).padEnd(longestItemName + extraLength - 3) +" | " //-3 because " | " is 3 long
+        toReturn+= ("$index. " //number of item
+            .padEnd(numberLength) //add spaces to make it numberlength long
+                +element.name) //add name of item
+            .padEnd(longestItemName + extraLength - 3) +" | "
+        //add spaces so that combined text is longestItemName + extraLength (which is number + numberLength)
+        //subtract 3 because " | " is 3 long
 
-        if ((index+1) % itemsPerRow == 0 && index != itemList.size-1) { //index is last of row, but not last index
+        if ((index+1) % itemsPerRow == 0 && index != itemList.size-1) { //if index is last of row, but not last index
             toReturn+= "\n"; //new line
         }
     }

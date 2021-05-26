@@ -6,7 +6,7 @@
  * @return A string with line breaks, use println() to print it.
  * (only use print() if you know that the current line is empty)
  */
-fun formatItemList(itemList: List<Item>, title: String) : String{
+public fun formatItemList(itemList: List<Item>, title: String) : String{
     var toReturn: String = "";
 
     var longestItemName: Int = 0;
@@ -25,7 +25,12 @@ fun formatItemList(itemList: List<Item>, title: String) : String{
     // (10, 12) = 12; (100, 12) = 100
 
 
-    val itemsPerRow: Int = Math.floor( screenWidth.toDouble() / (longestItemName + extraLength)).toInt()
+    val itemsPerRow: Int = Math.min(
+        Math.floor( screenWidth.toDouble() / (longestItemName + extraLength)).toInt(),
+        itemList.size);
+    // If there are less items in the itemList than can fit on a row,
+    // make the row less long so the inventory top and bottom lines are shorter
+    // (10, 3) = 3; (10, 24) = 10
 
     toReturn+= title.padEnd((longestItemName + extraLength) * itemsPerRow -1, '-') +"\n"; //top line with title
 

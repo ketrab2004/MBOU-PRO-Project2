@@ -1,4 +1,5 @@
 import classes.* //import all classes
+import classes.item.* //import all item classes ( .*.* doesn't work :( )
 import functions.doCommands.* //import all doCommands
 
 fun main(args: Array<String>) {

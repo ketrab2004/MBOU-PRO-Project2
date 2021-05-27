@@ -26,7 +26,7 @@ open class Item(val name: String,
     companion object {
         /**
          * Checks if given Any is a descendant class of item (or an item)
-         * @return true if it is a item, false if not
+         * @return true if it is an item, false if not
          */
         fun checkIfItem(input: Any) : Boolean{
             when (input){

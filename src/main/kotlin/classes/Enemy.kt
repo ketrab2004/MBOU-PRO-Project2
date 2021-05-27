@@ -1,5 +1,7 @@
 package classes
 
+import classes.item.Item
+
 open class Enemy(
     val name: String,
     val description: String,

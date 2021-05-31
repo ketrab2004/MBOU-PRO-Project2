@@ -1,6 +1,6 @@
 package functions.format
 
-import classes.Item
+import classes.item.*
 
 /**
  * Formats an [itemList] into a grid to display its contents.
@@ -10,14 +10,43 @@ import classes.Item
  * @return A string with line breaks, use println() to print it.
  * (only use print() if you know that the current line is empty)
  */
-public fun formatItemList(itemList: List<Item>, title: String) : String{
+public fun formatItemList(itemList: List<Any>, title: String) : String{
     var toReturn: String = "";
 
     var longestItemName: Int = 0;
 
-    itemList.forEach(){ //find how long longest item name is in itemList
-        if(it.name.length > longestItemName){
-            longestItemName = it.name.length
+    var nameArray = arrayOfNulls<String>(itemList.size);
+    itemList.forEachIndexed { index, item ->
+        when (item){ //do .name for each class type
+            is Item -> {
+                nameArray[index] = item.name;
+            }
+            is Weapon -> {
+                nameArray[index] = item.name;
+            }
+            is Armor -> {
+                nameArray[index] = item.name;
+            }
+            is Consumable -> {
+                nameArray[index] = item.name;
+            }
+            else -> { //not an item so do error
+                nameArray[index] = "Null";
+                println("⚠ $item is not an Item class and can't be shown in $title ⚠")
+            }
+        }
+    }
+
+    nameArray.forEach(){ //find how long longest item name is in itemList
+        //instead of
+        //it ? it.length : 0
+        var length = 0;
+        if (it != null){
+            length = it.length
+        }
+
+        if(length > longestItemName){
+            longestItemName = length;
         }
     }
 
@@ -39,10 +68,10 @@ public fun formatItemList(itemList: List<Item>, title: String) : String{
     toReturn+= title.padEnd((longestItemName + extraLength) * itemsPerRow -1, '-') +"\n"; //top line with title
     //subtract 1 because each item ends on " | " which has an extra space at the end which doesn't need a - above it
 
-    itemList.forEachIndexed { index, element ->
+    nameArray.forEachIndexed { index, element ->
         toReturn+= ("$index. " //number of item
             .padEnd(numberLength) //add spaces to make it numberlength long
-                +element.name) //add name of item
+                +element) //add name of item
             .padEnd(longestItemName + extraLength - 3) +" | "
         //add spaces so that combined text is longestItemName + extraLength (which is number + numberLength)
         //subtract 3 because " | " is 3 long

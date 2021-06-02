@@ -15,38 +15,9 @@ public fun formatItemList(itemList: List<Any>, title: String) : String{
 
     var longestItemName: Int = 0;
 
-    var nameArray = arrayOfNulls<String>(itemList.size);
-    itemList.forEachIndexed { index, item ->
-        when (item){ //do .name for each class type
-            is Item -> {
-                nameArray[index] = item.name;
-            }
-            is Weapon -> {
-                nameArray[index] = item.name;
-            }
-            is Armor -> {
-                nameArray[index] = item.name;
-            }
-            is Consumable -> {
-                nameArray[index] = item.name;
-            }
-            else -> { //not an item so do error
-                nameArray[index] = "Null";
-                println("⚠ $item is not an Item class and can't be shown in $title ⚠")
-            }
-        }
-    }
-
-    nameArray.forEach(){ //find how long longest item name is in itemList
-        //instead of
-        //it ? it.length : 0
-        var length = 0;
-        if (it != null){
-            length = it.length
-        }
-
-        if(length > longestItemName){
-            longestItemName = length;
+    itemList.forEach(){ //find how long longest item name is in itemList
+        if(Item.getName(it).length > longestItemName){
+            longestItemName = Item.getName(it).length;
         }
     }
 
@@ -68,10 +39,10 @@ public fun formatItemList(itemList: List<Any>, title: String) : String{
     toReturn+= title.padEnd((longestItemName + extraLength) * itemsPerRow -1, '-') +"\n"; //top line with title
     //subtract 1 because each item ends on " | " which has an extra space at the end which doesn't need a - above it
 
-    nameArray.forEachIndexed { index, element ->
+    itemList.forEachIndexed { index, element ->
         toReturn+= ("$index. " //number of item
             .padEnd(numberLength) //add spaces to make it numberlength long
-                +element) //add name of item
+                +Item.getName(element)) //add name of item
             .padEnd(longestItemName + extraLength - 3) +" | "
         //add spaces so that combined text is longestItemName + extraLength (which is number + numberLength)
         //subtract 3 because " | " is 3 long

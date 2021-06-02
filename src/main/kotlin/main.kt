@@ -14,6 +14,12 @@ fun main(args: Array<String>) {
 
     println("You, ${player.name}, enter Dracula's castle.")
 
+    //TODO start loop
+    /*
+    maybe show the description of first room etc
+     */
 
+    print("What will you do?\n* ")
+    doPlayerCommand(readLine().toString(), player)
 
 }

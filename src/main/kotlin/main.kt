@@ -14,9 +14,10 @@ fun main(args: Array<String>) {
 
     println("You, ${player.name}, enter Dracula's castle.")
 
-    //TODO start loop
-    /*
-    maybe show the description of first room etc
+    /*TODO
+     * start loop
+     * maybe show the description of first room etc
+     * also set player.Room or something
      */
 
     print("What will you do?\n* ")

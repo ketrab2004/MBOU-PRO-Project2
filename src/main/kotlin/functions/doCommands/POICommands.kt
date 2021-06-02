@@ -3,7 +3,7 @@ package functions.doCommands
 import classes.POI
 import classes.PossiblePOICommands
 
-public fun doCommandPOI(input: String, POIClass: POI){
+public fun doCommandPOI(input: String, POIClass: ){
     val arguments: List<String> = input.split(" ");
 
     when(arguments[0].toLowerCase()){ //switch case
@@ -63,7 +63,16 @@ private fun commandInspect(args: List<String> , POIClass: POI){
 }
 private fun commandEnter(args: List<String>, POIClass: POI){
     if(POIClass.usableCommands.contains(PossiblePOICommands.ENTER)) { //consume is a usable command
-        // TODO enter a new room
+        if (POIClass.isLocked)
+        {
+            //TODO Check player inventory for the right item to unlock POI
+            println("You do not have the right item to unlock this '${POIClass.name}'")
+        }
+        else
+        {
+            println("You open the '${POIClass.name}' and enter it.")
+            //TODO Send player to new room
+        }
     }else {
         println("You cannot enter '${POIClass.name}'.")
     }

@@ -1,4 +1,4 @@
-package classes
+package classes.POI
 
 enum class PossiblePOICommands {
     ENTER,
@@ -8,9 +8,9 @@ enum class PossiblePOICommands {
     USE,
 }
 
-//TODO make inventory a Classes.Item class list
+
 open class POI (val name: String,
                 val description: String,
                 val usableCommands : List<PossiblePOICommands> = listOf()){
-    var inventory: List<Int> = listOf()
+
 }

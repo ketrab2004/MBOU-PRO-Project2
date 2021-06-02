@@ -12,67 +12,20 @@ enum class ItemType{
     MISC
 }
 
-open class Item(val name: String,
+class Item(val name: String,
            val description: String,
            val maxStackSize: Int) {
 
-    open var type: ItemType = ItemType.MISC;
+    var type: ItemType = ItemType.MISC;
 
-    open var usableCommands: List<ItemCommands> = listOf(); //list of usable commands
+    var usableCommands: List<ItemCommands> = listOf(); //list of usable commands
+
+    var properties: Map<String, Any> = mapOf(); //like NBT tags in Minecraft
 
     var amount: Int = 1;
 
-    //static function
-    companion object {
-        /**
-         * Checks if given Any is a descendant class of item (or an item)
-         * @return true if it is an item, false if not
-         */
-        fun checkIfItem(input: Any) : Boolean{
-            when (input){
-                is Item -> {
-                    return true
-                }
-                is Weapon -> {
-                    return true
-                }
-                is Armor -> {
-                    return true
-                }
-                is Consumable -> {
-                    return true
-                }
-                else -> {
-                    return false
-                }
-            }
-        }
-
-        /**
-         * Checks if given Any is a descendant class of item (or an item) and returns it's name
-         * @return the name of the item, NULL if not an item
-         */
-        fun getName(item: Any) : String{
-            when (item){
-                is Item -> {
-                    return item.name
-                }
-                is Weapon -> {
-                    return item.name
-                }
-                is Armor -> {
-                    return item.name
-                }
-                is Consumable -> {
-                    return item.name
-                }
-                else -> {
-                    println("⚠ $item is not an item. ⚠")
-                    return "null"
-                }
-            }
-        }
-    }
+    //static stuff goes in here
+    companion object {}
 
     /* region item Do Command */
     /**

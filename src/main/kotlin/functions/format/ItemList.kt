@@ -11,6 +11,16 @@ import classes.item.*
  * (only use print() if you know that the current line is empty)
  */
 public fun formatItemList(itemList: List<Item>, title: String) : String{
+    if (itemList.isEmpty()){ //when empty avoid all normal steps
+        val content = " * empty * "
+        val length = Math.max(title.length +2, content.length) //length is either content or title+2 (so title has a couple stripes)
+        var toReturn = title.padEnd(length, '-') + "\n" //top line with title
+        toReturn+= "$content\n" //content
+        toReturn+= "".padEnd(length, '-') //bottom line
+
+        return toReturn
+    }
+
     var toReturn: String = "";
 
     var longestItemName: Int = 0;

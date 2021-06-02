@@ -10,14 +10,14 @@ import classes.item.*
  * @return A string with line breaks, use println() to print it.
  * (only use print() if you know that the current line is empty)
  */
-public fun formatItemList(itemList: List<Any>, title: String) : String{
+public fun formatItemList(itemList: List<Item>, title: String) : String{
     var toReturn: String = "";
 
     var longestItemName: Int = 0;
 
     itemList.forEach(){ //find how long longest item name is in itemList
-        if(Item.getName(it).length > longestItemName){
-            longestItemName = Item.getName(it).length;
+        if(it.name.length > longestItemName){
+            longestItemName = it.name.length;
         }
     }
 
@@ -42,7 +42,7 @@ public fun formatItemList(itemList: List<Any>, title: String) : String{
     itemList.forEachIndexed { index, element ->
         toReturn+= ("$index. " //number of item
             .padEnd(numberLength) //add spaces to make it numberlength long
-                +Item.getName(element)) //add name of item
+                +element.name) //add name of item
             .padEnd(longestItemName + extraLength - 3) +" | "
         //add spaces so that combined text is longestItemName + extraLength (which is number + numberLength)
         //subtract 3 because " | " is 3 long

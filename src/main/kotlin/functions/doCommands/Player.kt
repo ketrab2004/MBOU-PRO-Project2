@@ -43,7 +43,7 @@ public fun doPlayerCommand(input: String, plr: Player){
 
 
         else -> {
-            println("⚠ '${arguments[0]}' is not a known command")
+            println("⚠️'${arguments[0]}' is not a known command")
         }
     }
 }

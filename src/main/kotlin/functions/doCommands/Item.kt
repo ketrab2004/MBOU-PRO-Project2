@@ -49,7 +49,7 @@ public fun doCommand(input: String, item: Item){
 
 
         else -> {
-            println("⚠ '${arguments[0]}' is not a known command.")
+            println("⚠️'${arguments[0]}' is not a known command.")
         }
     }
 }

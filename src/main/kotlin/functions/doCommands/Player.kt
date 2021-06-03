@@ -1,7 +1,9 @@
 package functions.doCommands
 
+import classes.MenuType
 import classes.Player
 import functions.format.formatItemList
+import kotlin.system.exitProcess
 
 /**
  * Does a command based on the input [input]
@@ -58,14 +60,69 @@ private fun commandHelp(args: List<String>, plr: Player){
     println("* room, look".padEnd(padding)             +"Inspect/look around the current room.")
 }
 private fun commandExit(args: List<String>, plr: Player){
-    //TODO exit game
+    //TODO add: are you sure? and bye bye
+
+    exitProcess(0)
 }
 private fun commandInventory(args: List<String>, plr: Player){
     println(formatItemList(plr.inventory, "Inventory"));
 
-    //example: what item would you like to interact with: readline()
+    if (plr.inventory.isNotEmpty()){ //if stuff in inventory change currentMenu
 
-    //TODO change menu to inventory and show options etc.
+        println("What item would you like to interact with? ")
+
+        var chosen = false;
+        while (!chosen) {
+            print("- ") //line in front of where you type your choice
+            val read = readLine().toString()
+            when(read.toLowerCase()){
+
+                //exit out of loop
+                "leave" ->{ chosen = true; }
+                "back" ->{  chosen = true; }
+                "exit" ->{ chosen = true; }
+                "return" ->{ chosen = true; }
+
+                "help" ->{
+                    val padding: Int = 35; //using padEnd to add spaces to set a length, that way all the text lines up nicely
+                    println("Options:")
+                    println("- help".padEnd(padding)                            +"Shows all commands you can do.")
+                    println("- leave, back, exit, return".padEnd(padding)       +"Stop interacting with your inventory.")
+                    println("- inventory, inv, items".padEnd(padding)           +"Shows your inventory.")
+                    println("- { number }".padEnd(padding)                      +"Start interacting with said item.")
+                }
+
+                "inventory" ->{
+                    println(formatItemList(plr.inventory, "Inventory"));
+                }
+                "inv" ->{
+                    println(formatItemList(plr.inventory, "Inventory"));
+                }
+                "items" ->{
+                    println(formatItemList(plr.inventory, "Inventory"));
+                }
+
+                else ->{
+                    val input: Int? = read.toIntOrNull() //convert input to int (or null if not int)
+                    if (input != null){ //is number
+                        if (input <= plr.inventory.size && input >= 0){ //chose number in inventory
+                            chosen = true;
+                            plr.currentMenu = MenuType.INVENTORY
+                            plr.currentMenuIndex = input
+
+                        }else{
+                            println("You did not pick a valid index inside of your inventory.")
+                        }
+
+                    }else{ //is not a number
+                        println("You did not pick a valid number nor a valid command (type help for help)")
+                    }
+                }
+            }
+
+
+        }
+    } //else inventory is empty so dont do anything
 }
 private fun commandRoom(args: List<String>, plr: Player){
 

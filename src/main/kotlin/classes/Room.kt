@@ -1,4 +1,4 @@
 package classes
 
-class Room (name: String, description: String, poiList: List<classes.POI.POI>){
+class Room (val name: String, val description: String, var poiList: List<classes.POI.POI>){
 }

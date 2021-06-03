@@ -1,6 +1,6 @@
 package functions.format
 
-import classes.item.*
+import classes.Item
 
 /**
  * Formats an [itemList] into a grid to display its contents.

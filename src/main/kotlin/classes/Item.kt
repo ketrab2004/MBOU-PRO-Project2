@@ -1,4 +1,4 @@
-package classes.item
+package classes
 
 enum class ItemCommands{
     CONSUME,

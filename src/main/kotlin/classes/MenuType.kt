@@ -4,5 +4,5 @@ enum class MenuType() {
     NONE,
     INVENTORY,
     ROOM,
-    POI
+    BATTLE
 }

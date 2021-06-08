@@ -26,14 +26,13 @@ fun main(args: Array<String>) {
      * also set player.Room or something
      */
 
-    print("What will you do?\n* ")
-    doPlayerCommand(readLine().toString(), player)
+    println("What will you do?")
 
     while (true){ //game loop
         when(player.currentMenu){
             MenuType.NONE ->{
                 print("* ") //print * to type command after
-                doPlayerCommand(readLine().toString(), player)
+                doPlayerCommand(readLine().toString(), player, gameMap)
             }
             MenuType.INVENTORY ->{
                 val item = player.inventory[player.currentMenuIndex]
@@ -41,14 +40,13 @@ fun main(args: Array<String>) {
                 doCommand(readLine().toString(), item, player)
             }
             MenuType.ROOM ->{
-                val room = gameMap[player.currentLevel][player.currentRoom]
-                print("${room.name} * ") //print room name * to type command after
-                readLine().toString() //TODO surround with Room do Command
-            }
-            MenuType.POI ->{
                 val poi = gameMap[player.currentLevel][player.currentRoom].poiList[player.currentMenuIndex]
                 print("${poi.name} - ") //print poi name - to type command after
-                readLine().toString() //TODO surround with POI do Command
+                readLine().toString() //TODO surround with Poi do Command
+            }
+            MenuType.BATTLE ->{
+                print("\${enemy.name} * ") //print enemy name * to type command after
+                readLine().toString() //TODO surround with BATTLE do Command
             }
         }
     }

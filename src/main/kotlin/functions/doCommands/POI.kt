@@ -2,13 +2,14 @@ package functions.doCommands
 
 import classes.POI
 import classes.PossiblePOICommands
+import classes.POIType
 
-public fun doCommandPOI(input: String, POIClass: ){
+public fun doCommandPOI(input: String, POI: POI){
     val arguments: List<String> = input.split(" ");
 
     when(arguments[0].toLowerCase()){ //switch case
         "help" -> {
-            commandHelp(arguments, POIClass)
+            commandHelp(arguments)
         }
         //Go back
         "back" -> {
@@ -17,28 +18,25 @@ public fun doCommandPOI(input: String, POIClass: ){
 
         //Enter aliases
         "enter" -> {
-            commandEnter(arguments, POIClass)
+            commandEnter(arguments, POI)
         }
 
 
         //Open aliases
         "open" -> {
-            commandOpen(arguments, POIClass)
+            commandOpen(arguments, POI)
         }
         "search" -> {
-            commandOpen(arguments, POIClass)
+            commandOpen(arguments, POI)
         }
 
         //Pickup aliases
         "pickup" -> {
-            commandPickup(arguments, POIClass)
+            commandPickup(arguments, POI)
         }
         "pickup" -> {
-            commandPickup(arguments, POIClass)
+            commandPickup(arguments, POI)
         }
-
-
-
 
 
         else -> {
@@ -47,7 +45,7 @@ public fun doCommandPOI(input: String, POIClass: ){
     }
 }
 
-private fun commandHelp(args: List<String>, POIClass: POI){
+private fun commandHelp(args: List<String>){
     // TODO only show relevant commands
     val padding: Int = 35; //using padEnd to add spaces to set a length, that way all the text lines up nicely
     println("Commands:")

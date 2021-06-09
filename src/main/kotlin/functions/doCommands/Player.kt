@@ -131,5 +131,5 @@ private fun commandRoom(args: List<String>, plr: Player){
     println(room.name);
     println(room.description);
 
-    println(formatPOIList(room.poiList, "Objects inside ${room.name}"));
+    println(formatPOIList(room.poiList, ""));
 }

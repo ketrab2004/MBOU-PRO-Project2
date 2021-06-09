@@ -28,6 +28,14 @@ class Item(val name: String,
 
     var usableCommands: List<ItemCommands> = listOf(); //list of usable commands
 
+    /**
+     * List of known properties:
+     * 
+     * ``` (so formatting is kept)
+     * - "EatPoints" [Float]            How much health you gain when consuming it
+     * - "ArmorSlot" [ItemArmorSlot]    In what slot this item can be equipped
+     * ```
+     */
     var properties: Map<String, Any> = mapOf(); //like NBT tags in Minecraft
 
     var amount: Int = 1;

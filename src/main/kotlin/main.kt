@@ -1,9 +1,11 @@
 import classes.* //import all classes
+import classes.item.Item
+import classes.poi.POI
 import functions.doCommands.* //import all doCommands
 
 fun main(args: Array<String>) {
 
-    var gameMap: Array<List<Room>> = getGameMap(); //get gameMap from gameMap.kt
+    GlobalGameMap.setupGameMap() //setup game
 
     println("Welcome to Dracula's castle...")
 
@@ -11,11 +13,11 @@ fun main(args: Array<String>) {
     var player: Player = Player(readLine().toString(), "The player", 10f)
 
     // region TEMP
-    player.inventory += Item("Item 1", "woop", 1)
-    player.inventory += Item("Item 5", "woop", 1)
-    player.inventory += Item("Item 7", "woop", 1)
-    player.inventory += Item("Item 13", "woop", 1)
-    player.inventory += Item("Item 4", "woop", 1)
+    player.inventory.add(Item("Item 1", "woop", 1))
+    player.inventory.add(Item("Item 5", "woop", 1))
+    player.inventory.add(Item("Item 7", "woop", 1))
+    player.inventory.add(Item("Item 13", "woop", 1))
+    player.inventory.add(Item("Item 4", "woop", 1))
     // endregion
 
     println("You, ${player.name}, enter Dracula's castle.")
@@ -26,13 +28,13 @@ fun main(args: Array<String>) {
      * also set player.Room or something
      */
 
-    println("What will you do?")
+    println("What will you do? (type help for help)")
 
     while (true){ //game loop
         when(player.currentMenu){
             MenuType.NONE ->{
                 print("* ") //print * to type command after
-                doPlayerCommand(readLine().toString(), player, gameMap)
+                doPlayerCommand(readLine().toString(), player)
             }
             MenuType.INVENTORY ->{
                 val item = player.inventory[player.currentMenuIndex]
@@ -40,7 +42,7 @@ fun main(args: Array<String>) {
                 doCommand(readLine().toString(), item, player)
             }
             MenuType.ROOM ->{
-                val poi = gameMap[player.currentLevel][player.currentRoom].poiList[player.currentMenuIndex]
+                val poi = GlobalGameMap.gameMap[player.currentLevel][player.currentRoom].poiList[player.currentMenuIndex]
                 print("${poi.name} - ") //print poi name - to type command after
                 readLine().toString() //TODO surround with Poi do Command
             }

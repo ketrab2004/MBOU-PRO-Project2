@@ -1,6 +1,5 @@
 import classes.* //import all classes
 import classes.item.Item
-import classes.poi.POI
 import functions.doCommands.* //import all doCommands
 
 fun main(args: Array<String>) {

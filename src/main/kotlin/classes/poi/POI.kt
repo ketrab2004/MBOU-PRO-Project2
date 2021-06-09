@@ -14,7 +14,6 @@ open class POI (val name: String, val description: String){
      * - "Key" [String]; Code that a key needs to have to be able to unlock this (also works on containers)
      * - "Content" [MutableList]<[Item]>; List of items inside of this POI
      * - "Pickup" [Item]; Used when POI is just a single item on the ground
-     * ```
      */
     var properties: Map<String, Any> = mapOf(); //like NBT tags in Minecraft
 }

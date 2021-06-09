@@ -1,8 +1,6 @@
 package functions.format
 
 import classes.poi.POI
-import classes.poi.*
-
 
 /**
  * Formats an [POIList] into a grid to display its contents.
@@ -15,7 +13,7 @@ import classes.poi.*
  */
 public fun formatPOIList(POIList: List<POI>, title: String) : String{
     if (POIList.isEmpty()){ //when empty avoid all normal steps
-        val content = " * empty * "
+        val content = " * nothing * "
         val length = Math.max(title.length +2, content.length) //length is either content or title+2 (so title has a couple stripes)
         var toReturn = title.padEnd(length, '-') + "\n" //top line with title
         toReturn+= "$content\n" //content

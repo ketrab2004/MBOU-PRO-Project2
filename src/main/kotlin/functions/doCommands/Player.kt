@@ -4,12 +4,13 @@ import classes.MenuType
 import classes.Player
 import classes.Room
 import functions.format.formatItemList
+import functions.format.formatPOIList
 import kotlin.system.exitProcess
 
 /**
  * Does a command based on the input [input]
  */
-public fun doPlayerCommand(input: String, plr: Player, gameMap: Array<List<Room>>){
+public fun doPlayerCommand(input: String, plr: Player){
     val arguments: List<String> = input.split(" ");
 
     when(arguments[0].toLowerCase()){ //switch case
@@ -38,10 +39,10 @@ public fun doPlayerCommand(input: String, plr: Player, gameMap: Array<List<Room>
 
         //Classes.Room aliases
         "room" -> {
-            commandRoom(arguments, plr, gameMap)
+            commandRoom(arguments, plr)
         }
         "look" -> {
-            commandRoom(arguments, plr, gameMap)
+            commandRoom(arguments, plr)
         }
 
 
@@ -123,11 +124,12 @@ private fun commandInventory(args: List<String>, plr: Player){
 
 
         }
-    } //else inventory is empty so dont do anything
+    } //else inventory is empty so don't do anything
 }
-private fun commandRoom(args: List<String>, plr: Player, gameMap: Array<List<Room>>){
-    val room = gameMap[plr.currentLevel][plr.currentRoom];
+private fun commandRoom(args: List<String>, plr: Player){
+    val room = GlobalGameMap.gameMap[plr.currentLevel][plr.currentRoom];
     println(room.name);
     println(room.description);
-    //TODO print POIList
+
+    println(formatPOIList(room.poiList, "Objects inside ${room.name}"));
 }

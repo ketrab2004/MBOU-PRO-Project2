@@ -1,12 +1,14 @@
 package functions.doCommands
 
-import classes.item.ItemCommands
-import classes.item.Item
+import classes.ItemCommands
+import classes.Item
+import classes.MenuType
+import classes.Player
 
 /**
  * Does a command based on the input
  */
-public fun doCommand(input: String, item: Item){
+public fun doCommand(input: String, item: Item, plr: Player){
     val arguments: List<String> = input.split(" ");
 
 
@@ -17,7 +19,7 @@ public fun doCommand(input: String, item: Item){
         }
         //Go back
         "back" -> {
-            commandBack(arguments, item)
+            commandBack(arguments, plr)
         }
 
         //Inspect aliases
@@ -49,7 +51,7 @@ public fun doCommand(input: String, item: Item){
 
 
         else -> {
-            println("⚠ '${arguments[0]}' is not a known command.")
+            println("⚠️'${arguments[0]}' is not a known command.")
         }
     }
 }
@@ -81,6 +83,6 @@ private fun commandEquip(args: List<String>, item: Item){
         println("You cannot equip '${item.name}'.")
     }
 }
-private fun commandBack(args: List<String>, item: Item){
-    //TODO go back
+private fun commandBack(args: List<String>, plr: Player){
+    plr.currentMenu = MenuType.NONE;
 }

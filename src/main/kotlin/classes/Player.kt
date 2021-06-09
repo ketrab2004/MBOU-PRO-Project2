@@ -3,9 +3,11 @@ package classes
 class Player(name: String, description: String, maxHealth: Float)
     : Enemy(name, description, maxHealth) { //extends Classes.Enemy
 
-    lateinit var currentRoom: Room; //lateinit because it's null
+    var currentLevel: Int = 0; //index of level in gameMap array
+    var currentRoom: Int = 0; //index of room in gameMap array > list
 
-
+    var currentMenu: MenuType = MenuType.NONE
+    var currentMenuIndex: Int = 0; //if in a inventory menu this index points to which one
 
 
 }

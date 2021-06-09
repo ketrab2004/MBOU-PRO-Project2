@@ -1,6 +1,6 @@
 package functions.format
 
-import classes.POI.*
+import classes.poi.*
 
 /**
  * Formats an [POIList] into a grid to display its contents.

@@ -1,24 +1,4 @@
-package classes
-
-enum class ItemCommands{
-    CONSUME,
-    EQUIP
-
-}
-enum class ItemType{
-    WEAPON,
-    WEARABLE,
-    EDIBLE,
-    MISC
-}
-
-enum class ItemArmorSlot(val index: Int){
-    HEAD(0),
-    TORSO(1),
-    LEGS(2),
-    FEET(3),
-    OFFHAND(4)
-}
+package classes.item
 
 class Item(val name: String, val description: String, val maxStackSize: Int) {
 

@@ -5,5 +5,5 @@ class Container (name: String,
                  usableCommands : List<PossiblePOICommands> = listOf())
             : POI(name, description, usableCommands){ //Extends POI
     var isLocked: Boolean = false;
-    var inventory: List<classes.Item> = listOf()
+    var inventory: List<classes.item.Item> = listOf()
 }

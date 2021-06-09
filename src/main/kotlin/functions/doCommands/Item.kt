@@ -1,9 +1,7 @@
 package functions.doCommands
 
-import classes.ItemCommands
-import classes.Item
-import classes.MenuType
-import classes.Player
+import classes.*
+import kotlin.math.round
 
 /**
  * Does a command based on the input
@@ -32,21 +30,21 @@ public fun doCommand(input: String, item: Item, plr: Player){
 
         //Consume aliases
         "consume" -> {
-            commandConsume(arguments, item)
+            commandConsume(arguments, item, plr)
         }
         "eat" -> {
-            commandConsume(arguments, item)
+            commandConsume(arguments, item, plr)
         }
         "drink" -> {
-            commandConsume(arguments, item)
+            commandConsume(arguments, item, plr)
         }
 
         //Equip aliases
         "equip" -> {
-            commandEquip(arguments, item)
+            commandEquip(arguments, plr, item)
         }
         "wear" -> {
-            commandEquip(arguments, item)
+            commandEquip(arguments, plr, item)
         }
 
 
@@ -69,16 +67,51 @@ private fun commandInspect(args: List<String>, item: Item){
     println("You inspect ${item.name}.")
     println(item.description)
 }
-private fun commandConsume(args: List<String>, item: Item){
+private fun commandConsume(args: List<String>, item: Item, plr: Player){
     if(item.usableCommands.contains(ItemCommands.CONSUME)) { //consume is a usable command
+        val consumePoints = item.properties["EatPoints"];
+        if (consumePoints is Float){
 
+            if (plr.health < plr.maxHealth) { //can heal
+                val gainedHealth = plr.addHealth(consumePoints);
+
+                println("You consumed '${item.name}' and gained ${round(gainedHealth * 10) * .1} health.")
+                if (plr.health == plr.maxHealth){
+                    println("You are now at full health.")
+                }
+
+                plr.inventory.remove(item); //remove item from inventory
+            }else{
+                println("You cannot eat when you are at full health.")
+            }
+        }else{ //consume is in usable commands but no EatPoints given
+            println("You cannot consume '${item.name}'.")
+        }
     }else {
         println("You cannot consume '${item.name}'.")
     }
 }
-private fun commandEquip(args: List<String>, item: Item){
+private fun commandEquip(args: List<String>, plr: Player, item: Item){
     if(item.usableCommands.contains(ItemCommands.EQUIP)) { //equip is a usable command
+        val itemArmor = item.properties["ArmorSlot"]; //get item's ArmorSlot property
+        if (itemArmor is ItemArmorSlot) {
+            val equippedItem = plr.equipped[itemArmor.index]
+            if (equippedItem == null){ //player is not yet wearing armor in that slot
+                plr.equipped[itemArmor.index] = item; //equip in slot
 
+                plr.inventory.remove(item); //remove from inventory
+
+                println("You equipped '${item.name}'.")
+            }else{ //player is already wearing something
+                plr.inventory.add( equippedItem ) //add into inventory
+                println("You unequipped '${equippedItem.name}' and equipped '${item.name}'.")
+                
+                plr.equipped[itemArmor.index] = item; //overwrite previously equipped item
+                plr.inventory.remove(item); //remove from inventory
+            }
+        }else{ //equip is in usable commands, but no armorSlot is given
+            println("You cannot equip '${item.name}'.")
+        }
     }else {
         println("You cannot equip '${item.name}'.")
     }

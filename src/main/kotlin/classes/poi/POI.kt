@@ -1,20 +1,6 @@
-package classes
+package classes.poi
 
-enum class PossiblePOICommands {
-    ENTER,
-    OPEN,
-    PICKUP
-}
-enum class POIType{
-    MISC,
-    DOOR,
-    STAIRCASE,
-    CONTAINER,
-    ITEM
-}
-
-
-class POI (val name: String, val description: String){
+open class POI (val name: String, val description: String){
 
     var type: POIType = POIType.MISC;
 

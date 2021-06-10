@@ -43,12 +43,14 @@ open class POI (val name: String, val description: String){
 
         /**
          * Creates a staircase poi and returns it
-         * @param[targetFloor] index of room behind door
+         * @param[targetFloor] index of floor up/down the stairs
+         * @param[targetRoom] index of room behind door
          * @param[key] keycode required to unlock this door (null if not locked)
          */
-        public fun createStaircase(name: String, description: String, targetFloor: Int, key: String?): POI {
+        public fun createStaircase(name: String, description: String, targetFloor: Int, targetRoom: Int, key: String?): POI {
             var poi = POI(name, description);
 
+            poi.properties["TargetRoom"] = targetRoom;
             poi.properties["TargetFloor"] = targetFloor;
             if (key != null){ //if key is given
                 poi.properties["Key"] = key;

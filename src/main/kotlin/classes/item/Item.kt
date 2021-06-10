@@ -4,7 +4,7 @@ class Item(val name: String, val description: String, val maxStackSize: Int) {
 
     var type: ItemType = ItemType.MISC;
 
-    var usableCommands: MutableList<ItemCommands> = mutableListOf(); //list of usable commands
+    var usableCommands: List<ItemCommands> = listOf(); //list of usable commands
 
     /**
      * ## List of known properties:
@@ -30,7 +30,7 @@ class Item(val name: String, val description: String, val maxStackSize: Int) {
             item.properties["EatPoints"] = eatPoints;
             item.type = ItemType.EDIBLE;
 
-            item.usableCommands.add(ItemCommands.CONSUME);
+            item.usableCommands+= ItemCommands.CONSUME;
 
             return item;
         }
@@ -47,7 +47,7 @@ class Item(val name: String, val description: String, val maxStackSize: Int) {
             item.properties["ArmorPerc"] = armorPerc;
 
             item.type = ItemType.WEARABLE;
-            item.usableCommands.add(ItemCommands.EQUIP);
+            item.usableCommands+= ItemCommands.EQUIP;
 
             return item;
         }
@@ -74,7 +74,7 @@ class Item(val name: String, val description: String, val maxStackSize: Int) {
 
             item.properties["Damage"] = damage;
             item.type = ItemType.WEAPON;
-            item.usableCommands.add(ItemCommands.EQUIPWEAPON);
+            item.usableCommands+= ItemCommands.EQUIPWEAPON;
 
             return item;
         }

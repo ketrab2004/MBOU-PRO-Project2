@@ -84,7 +84,7 @@ open class POI (val name: String, val description: String){
         public fun createPickup(name: String, description: String, pickup: Item): POI {
             var poi = POI(name, description);
 
-            poi.properties["Content"] = pickup;
+            poi.properties["Pickup"] = pickup;
             poi.type = POIType.ITEM;
             poi.usableCommands+= PossiblePOICommands.PICKUP;
 

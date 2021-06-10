@@ -1,5 +1,6 @@
 import classes.* //import all classes
 import classes.item.*
+import classes.poi.POI
 import functions.doCommands.* //import all doCommands
 
 fun main(args: Array<String>) {
@@ -43,7 +44,7 @@ fun main(args: Array<String>) {
             MenuType.ROOM ->{
                 val poi = GlobalGameMap.gameMap[player.currentLevel][player.currentRoom].poiList[player.currentMenuIndex]
                 print("${poi.name} - ") //print poi name - to type command after
-                readLine().toString() //TODO surround with Poi do Command
+                doCommandPOI(readLine().toString(), poi, player);
             }
             MenuType.BATTLE ->{
                 print("\${enemy.name} * ") //print enemy name * to type command after

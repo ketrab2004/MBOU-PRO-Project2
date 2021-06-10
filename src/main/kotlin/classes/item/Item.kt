@@ -10,12 +10,69 @@ class Item(val name: String, val description: String, val maxStackSize: Int) {
      * ## List of known properties:
      * - "EatPoints" [Float]; How much health you gain when consuming it
      * - "ArmorSlot" [ItemArmorSlot]; In what slot this item can be equipped
+     * - "ArmorPerc" [Float]; Percentage of damage to ignore (0-1)
      * - "Key" [String]; Key what gets used to unlock a door
+     * - "Damage" [Float]; Amount of damage this weapon does when used
      */
-    var properties: Map<String, Any> = mapOf(); //like NBT tags in Minecraft
+    var properties: MutableMap<String, Any> = mutableMapOf(); //like NBT tags in Minecraft
 
     var amount: Int = 1;
 
     //static stuff goes in here
-    companion object {}
+    companion object {
+        /**
+         * Creates a consumable item and returns it
+         * @param[eatPoints] amount of health to add when consumed
+         */
+        public fun createEdible(name: String, description: String, maxStackSize: Int, eatPoints: Float): Item{
+            var item = Item(name, description, maxStackSize);
+
+            item.properties["EatPoints"] = eatPoints;
+            item.type = ItemType.EDIBLE;
+
+            return item;
+        }
+
+        /**
+         * Creates a wearable item and returns it
+         * @param[armorSlot] in what slot this can be equipped
+         * @param[armorPerc] percentage of damage to ignore (0-1)
+         */
+        public fun createWearable(name: String, description: String, maxStackSize: Int, armorSlot: ItemArmorSlot, armorPerc: Float): Item{
+            var item = Item(name, description, maxStackSize);
+
+            item.properties["ArmorSlot"] = armorSlot;
+            item.properties["ArmorPerc"] = armorPerc;
+
+            item.type = ItemType.WEARABLE;
+
+            return item;
+        }
+
+        /**
+         * Creates a key and returns it
+         * @param[key] string which is the key
+         */
+        public fun createKey(name: String, description: String, maxStackSize: Int, key: String): Item{
+            var item = Item(name, description, maxStackSize);
+
+            item.properties["Key"] = key;
+            item.type = ItemType.KEY;
+
+            return item;
+        }
+
+        /**
+         * Creates a weapon and returns it
+         * @param[damage] amount of damage this weapon does when used
+         */
+        public fun createWeapon(name: String, description: String, maxStackSize: Int, damage: Float): Item{
+            var item = Item(name, description, maxStackSize);
+
+            item.properties["Damage"] = damage;
+            item.type = ItemType.WEAPON;
+
+            return item;
+        }
+    }
 }

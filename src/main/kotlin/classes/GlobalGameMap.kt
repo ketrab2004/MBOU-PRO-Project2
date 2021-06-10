@@ -62,6 +62,7 @@ class GlobalGameMap {
             //endregion level 0
 
             //TODO make first floor here
+            //and other floors aswell
         }
     }
 }

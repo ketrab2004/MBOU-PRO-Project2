@@ -12,7 +12,7 @@ fun main(args: Array<String>) {
     var player: Player = Player(readLine().toString(), "The player", 10f)
 
     // region TEMP
-    player.inventory.add(Item.createEdible("Food", "Tasty", 1, 1f))
+    player.inventory.add(Item.createConsumable("Food", "Tasty", 1, 1f))
     player.inventory.add(Item.createWearable("Helmet", "for your head", ItemArmorSlot.HEAD, .1f))
     player.inventory.add(Item.createKey("Golden key", "Made of gold", "abcdefghijklmnop"))
     player.inventory.add(Item("Item 13", "foo", 1))

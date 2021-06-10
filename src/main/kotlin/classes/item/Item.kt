@@ -24,7 +24,7 @@ class Item(val name: String, val description: String, val maxStackSize: Int) {
          * Creates a consumable item and returns it
          * @param[eatPoints] amount of health to add when consumed
          */
-        public fun createEdible(name: String, description: String, maxStackSize: Int, eatPoints: Float): Item{
+        public fun createConsumable(name: String, description: String, maxStackSize: Int, eatPoints: Float): Item{
             var item = Item(name, description, maxStackSize);
 
             item.properties["EatPoints"] = eatPoints;

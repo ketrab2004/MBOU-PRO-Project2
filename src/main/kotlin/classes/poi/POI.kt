@@ -36,6 +36,7 @@ open class POI (val name: String, val description: String){
             }
 
             poi.type = POIType.DOOR;
+            poi.usableCommands+= PossiblePOICommands.ENTER;
 
             return poi;
         }
@@ -55,6 +56,7 @@ open class POI (val name: String, val description: String){
             }
 
             poi.type = POIType.STAIRCASE;
+            poi.usableCommands+= PossiblePOICommands.ENTER;
 
             return poi;
         }
@@ -68,6 +70,7 @@ open class POI (val name: String, val description: String){
 
             poi.properties["Content"] = content;
             poi.type = POIType.CONTAINER;
+            poi.usableCommands+= PossiblePOICommands.OPEN;
 
             return poi;
         }
@@ -81,6 +84,7 @@ open class POI (val name: String, val description: String){
 
             poi.properties["Content"] = pickup;
             poi.type = POIType.ITEM;
+            poi.usableCommands+= PossiblePOICommands.PICKUP;
 
             return poi;
         }

@@ -24,30 +24,30 @@ class GlobalGameMap {
             var mainRoom =
                 Room("Main hallway", "A big hallway leading through the entire bottom floor of the castle.")
 
-            mainRoom.poiList.add(
-                POI.createContainer("Hat Stand", "A stand for putting hats on.",
-                    mutableListOf(
+            mainRoom.poiList.addAll(
+                listOf( //listOf only for the addAll function
+                    POI.createContainer("Hat Stand", "A stand for putting hats on.",
+                        mutableListOf(
+                            Item.createWearable(
+                                "Fancy hat",
+                                "A shiny black hat for suits. Doesn't offer any protection.",
+                                ItemArmorSlot.HEAD,
+                                0f),
+                            Item.createWearable(
+                                "Baseball cap",
+                                "A white baseball cap with a blue rim. Doesn't offer any protection.",
+                                ItemArmorSlot.HEAD,
+                                0f)
+                        )
+                    ),POI.createPickup("Boots", "A pair of boots on the ground",
                         Item.createWearable(
-                            "Fancy hat",
-                            "A shiny black hat for suits. Doesn't offer any protection.",
-                            ItemArmorSlot.HEAD,
-                            0f),
-                        Item.createWearable(
-                            "Baseball cap",
-                            "A white baseball cap with a blue rim. Doesn't offer any protection.",
-                            ItemArmorSlot.HEAD,
-                            0f)
+                            "Dracula's boots",
+                            "Who knew Dracula had boots? Offers very little protection.",
+                            ItemArmorSlot.FEET,
+                            0.001f)
                     )
-                ))
-
-            mainRoom.poiList.add(
-                POI.createPickup("Boots", "A pair of boots on the ground",
-                    Item.createWearable(
-                        "Dracula's boots",
-                        "Who knew Dracula had boots? Offers very little protection.",
-                        ItemArmorSlot.FEET,
-                        0.001f)
-                ))
+                )
+            )
             //TODO more POIs
             //endregion main room
 

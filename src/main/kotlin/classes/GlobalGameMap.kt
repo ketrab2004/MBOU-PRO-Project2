@@ -24,7 +24,7 @@ class GlobalGameMap {
             var mainRoom =
                 Room("Main hallway", "A big hallway leading through the entire bottom floor of the castle.")
 
-            mainRoom.poiList +=
+            mainRoom.poiList.add(
                 POI.createContainer("Hat Stand", "A stand for putting hats on.",
                     mutableListOf(
                         Item.createWearable(
@@ -38,15 +38,16 @@ class GlobalGameMap {
                             ItemArmorSlot.HEAD,
                             0f)
                     )
-                )
+                ))
 
-            mainRoom.poiList +=
+            mainRoom.poiList.add(
                 POI.createPickup("Boots", "A pair of boots on the ground",
                     Item.createWearable(
                         "Dracula's boots",
                         "Who knew Dracula had boots? Offers very little protection.",
                         ItemArmorSlot.FEET,
-                        0.001f))
+                        0.001f)
+                ))
             //TODO more POIs
             //endregion main room
 

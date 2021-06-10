@@ -1,5 +1,6 @@
 package functions.doCommands
 
+import classes.MenuType
 import classes.Player
 import classes.item.Item
 import classes.poi.*
@@ -13,7 +14,7 @@ public fun doCommandPOI(input: String, POI: POI, plr: Player){
         }
         //Go back
         "back" -> {
-            commandBack(arguments)
+            commandBack(arguments, plr)
         }
 
         //Inspect aliases
@@ -69,7 +70,8 @@ private fun commandHelp(args: List<String>){
     println("* inspect, info".padEnd(padding)           +"Inspect the object to see it's description.")
     println("* enter".padEnd(padding)                   +"Enter the door/staircase.")
     println("* open, search".padEnd(padding)            +"Open the object to see it's content.")
-    println("* destroy, break".padEnd(padding)            +"Destroy the object.")
+    println("* pickup, grab".padEnd(padding)            +"Pickup the item.")
+    println("* destroy, break".padEnd(padding)          +"Destroy the object.")
     println("* back".padEnd(padding)                    +"Return to the previous menu.")
 }
 private fun commandInspect(args: List<String> , POIClass: POI){
@@ -143,6 +145,6 @@ private fun commandUse(args: List<String>, POI: POI){
         println("There is no way to use '${POI.name}'.")
     }
 }
-private fun commandBack(args: List<String>){
-    //TODO go back
+private fun commandBack(args: List<String>, plr: Player){
+    plr.currentMenu = MenuType.NONE;
 }

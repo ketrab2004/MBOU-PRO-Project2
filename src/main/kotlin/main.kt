@@ -1,5 +1,5 @@
 import classes.* //import all classes
-import classes.item.Item
+import classes.item.*
 import functions.doCommands.* //import all doCommands
 
 fun main(args: Array<String>) {
@@ -12,11 +12,11 @@ fun main(args: Array<String>) {
     var player: Player = Player(readLine().toString(), "The player", 10f)
 
     // region TEMP
-    player.inventory.add(Item("Item 1", "woop", 1))
-    player.inventory.add(Item("Item 5", "woop", 1))
-    player.inventory.add(Item("Item 7", "woop", 1))
-    player.inventory.add(Item("Item 13", "woop", 1))
-    player.inventory.add(Item("Item 4", "woop", 1))
+    player.inventory.add(Item.createEdible("Food", "Tasty", 1, 1f))
+    player.inventory.add(Item.createWearable("Helmet", "for your head", ItemArmorSlot.HEAD, .1f))
+    player.inventory.add(Item.createKey("Golden key", "Made of gold", "abcdefghijklmnop"))
+    player.inventory.add(Item("Item 13", "foo", 1))
+    player.inventory.add(Item("Item 4", "bar", 1))
     // endregion
 
     println("You, ${player.name}, enter Dracula's castle.")

@@ -38,8 +38,8 @@ class Item(val name: String, val description: String, val maxStackSize: Int) {
          * @param[armorSlot] in what slot this can be equipped
          * @param[armorPerc] percentage of damage to ignore (0-1)
          */
-        public fun createWearable(name: String, description: String, maxStackSize: Int, armorSlot: ItemArmorSlot, armorPerc: Float): Item{
-            var item = Item(name, description, maxStackSize);
+        public fun createWearable(name: String, description: String, armorSlot: ItemArmorSlot, armorPerc: Float): Item{
+            var item = Item(name, description, 1);
 
             item.properties["ArmorSlot"] = armorSlot;
             item.properties["ArmorPerc"] = armorPerc;
@@ -53,8 +53,8 @@ class Item(val name: String, val description: String, val maxStackSize: Int) {
          * Creates a key and returns it
          * @param[key] string which is the key
          */
-        public fun createKey(name: String, description: String, maxStackSize: Int, key: String): Item{
-            var item = Item(name, description, maxStackSize);
+        public fun createKey(name: String, description: String, key: String): Item{
+            var item = Item(name, description, 1);
 
             item.properties["Key"] = key;
             item.type = ItemType.KEY;
@@ -66,8 +66,8 @@ class Item(val name: String, val description: String, val maxStackSize: Int) {
          * Creates a weapon and returns it
          * @param[damage] amount of damage this weapon does when used
          */
-        public fun createWeapon(name: String, description: String, maxStackSize: Int, damage: Float): Item{
-            var item = Item(name, description, maxStackSize);
+        public fun createWeapon(name: String, description: String, damage: Float): Item{
+            var item = Item(name, description, 1);
 
             item.properties["Damage"] = damage;
             item.type = ItemType.WEAPON;

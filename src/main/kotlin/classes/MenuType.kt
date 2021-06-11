@@ -27,6 +27,16 @@ enum class MenuType() {
      */
     IN_ROOM,
 
+    /**
+     * Looking through the items inside of a container
+     */
+    CONTAINER,
+
+    /**
+     * After having chosen an item from a container
+     */
+    IN_CONTAINER,
+
 
     BATTLE
 }

@@ -4,6 +4,8 @@ import classes.MenuType
 import classes.Player
 import classes.item.Item
 import classes.poi.*
+import functions.format.formatItemList
+import functions.format.formatPOIList
 
 public fun doCommandPOI(input: String, POI: POI, plr: Player){
     val arguments: List<String> = input.split(" ");
@@ -33,10 +35,10 @@ public fun doCommandPOI(input: String, POI: POI, plr: Player){
 
         //Open aliases
         "open" -> {
-            commandOpen(arguments, POI)
+            commandOpen(arguments, POI, plr)
         }
         "search" -> {
-            commandOpen(arguments, POI)
+            commandOpen(arguments, POI, plr)
         }
 
         //Pickup aliases
@@ -100,19 +102,32 @@ private fun commandEnter(args: List<String>, POI: POI, plr: Player){
         println("You cannot enter '${POI.name}'.")
     }
 }
-private fun commandOpen(args: List<String>, POI: POI){
+private fun commandOpen(args: List<String>, POI: POI, plr: Player){
     if(POI.usableCommands.contains(PossiblePOICommands.OPEN)) { //open is a usable command
-        val isLocked = POI.properties["IsLocked"]
-        if (isLocked is Boolean){
-            if (isLocked){
-                println("This '${POI.name}' is locked and needs to be unlocked before it can be opened.");
-                //TODO loop through items to find the key
+        var content = POI.properties["Content"];
+        if (content is MutableList<*>) {
+            val isLocked = POI.properties["IsLocked"]
+            if (isLocked is Boolean) {
+                if (isLocked) {
+                    println("This '${POI.name}' is locked and needs to be unlocked before it can be opened.");
+                    //TODO loop through items to find the key
 
-            }else{ //container is not locked
-                //TODO open container
+                } else { //container is not locked
+                    plr.currentMenu = MenuType.CONTAINER;
+                    //currentMenuIndex doesn't change
+
+                    @Suppress("UNCHECKED_CAST") //intelij :)
+                    println(formatItemList(content as List<Item>, POI.name));
+                }
+            } else { //container does not have a isLocked var
+                plr.currentMenu = MenuType.CONTAINER;
+                //currentMenuIndex doesn't change
+
+                @Suppress("UNCHECKED_CAST") //intelij :)
+                println(formatItemList(content as List<Item>, POI.name));
             }
-        }else{ //container does not have a isLocked var
-            //TODO open container
+        }else{ //poi has open as possible command but doesn't have content
+            println("You cannot open '${POI.name}'.")
         }
     }else {
         println("You cannot open '${POI.name}'.")

@@ -35,6 +35,7 @@ fun main(args: Array<String>) {
                 print("* ") //print * to type command after
                 doPlayerCommand(readLine().toString(), player)
             }
+
             MenuType.INVENTORY ->{ //look through your inventory to pick an item
                 print("- ") // - to type command after
                 doCommandInventory(readLine().toString(), player)
@@ -44,6 +45,7 @@ fun main(args: Array<String>) {
                 print("${item.name} - ") //print item name - to type command after
                 doCommandItem(readLine().toString(), item, player)
             }
+
             MenuType.ROOM ->{ //look through current room to pick a poi
                 print("- ") // - to type command after
                 doCommandRoom(readLine().toString(), player)
@@ -53,6 +55,19 @@ fun main(args: Array<String>) {
                 print("${poi.name} - ") //print poi name - to type command after
                 doCommandPOI(readLine().toString(), poi, player);
             }
+
+            MenuType.CONTAINER ->{
+                val poi = GlobalGameMap.gameMap[player.currentLevel][player.currentRoom].poiList[player.currentMenuIndex]
+                print("${poi.name}>- ") //print poi name >- to type command after
+                doCommandContainer(readLine().toString(), player);
+            }
+            MenuType.IN_CONTAINER ->{
+                val poi = GlobalGameMap.gameMap[player.currentLevel][player.currentRoom].poiList[player.currentMenuIndex]
+                val inventory = poi.properties["Content"] as MutableList<Item>;
+                print("${poi.name}> ${inventory[player.currentMenuIndex1].name} - ") //print poi name >- to type command after
+                doCommandIn_Container(readLine().toString(), player, inventory, poi);
+            }
+
             MenuType.BATTLE ->{
                 print("\${enemy.name} * ") //print enemy name * to type command after
                 readLine().toString() //TODO surround with BATTLE do Command

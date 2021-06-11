@@ -1,6 +1,5 @@
 import classes.* //import all classes
 import classes.item.*
-import classes.poi.POI
 import functions.doCommands.* //import all doCommands
 
 fun main(args: Array<String>) {
@@ -36,12 +35,20 @@ fun main(args: Array<String>) {
                 print("* ") //print * to type command after
                 doPlayerCommand(readLine().toString(), player)
             }
-            MenuType.INVENTORY ->{
+            MenuType.INVENTORY ->{ //look through your inventory to pick an item
+                print("- ") // - to type command after
+                doCommandInventory(readLine().toString(), player)
+            }
+            MenuType.IN_INVENTORY ->{ //When you have selected an item inside of your inventory
                 val item = player.inventory[player.currentMenuIndex]
                 print("${item.name} - ") //print item name - to type command after
-                doCommand(readLine().toString(), item, player)
+                doCommandItem(readLine().toString(), item, player)
             }
-            MenuType.ROOM ->{
+            MenuType.ROOM ->{ //look through current room to pick a poi
+                print("- ") // - to type command after
+                doCommandRoom(readLine().toString(), player)
+            }
+            MenuType.IN_ROOM ->{
                 val poi = GlobalGameMap.gameMap[player.currentLevel][player.currentRoom].poiList[player.currentMenuIndex]
                 print("${poi.name} - ") //print poi name - to type command after
                 doCommandPOI(readLine().toString(), poi, player);

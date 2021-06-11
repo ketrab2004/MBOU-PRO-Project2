@@ -86,8 +86,12 @@ private fun commandEnter(args: List<String>, POI: POI, plr: Player){
                 println("This '${POI.name}' is locked and needs to be unlocked before it can be entered.");
                 //TODO loop through items to find the key
 
+                plr.currentMenu = MenuType.NONE; //go back after entering
+
             }else{ //door is not locked
                 //TODO use staircase/door
+
+                plr.currentMenu = MenuType.NONE; //go back after entering
             }
         }else{ //door is not locked
             //TODO use staircase/door
@@ -123,6 +127,7 @@ private fun commandPickup(args: List<String>, POI: POI, plr: Player){
             println("You acquired '${pickup.name}'.")
 
             GlobalGameMap.gameMap[plr.currentLevel][plr.currentRoom].poiList.remove(POI)
+            plr.currentMenu = MenuType.ROOM; //chosen poi doesn't exist anymore so go back to pick a new one
         }else{ //poi has pickup as possible command but doesn't contain an item to pickup
             println("You cannot pick up '${POI.name}'.")
         }
@@ -134,6 +139,7 @@ private fun commandDestroy(args: List<String>, POI: POI, plr: Player){
     if(POI.usableCommands.contains(PossiblePOICommands.DESTROY)) { //equip is a usable command
         println("You destroyed '${POI.name}'.")
         GlobalGameMap.gameMap[plr.currentLevel][plr.currentRoom].poiList.remove(POI)
+        plr.currentMenu = MenuType.ROOM; //chosen poi doesn't exist anymore so go back to pick a new one
     }else {
         println("You cannot destroy '${POI.name}'.")
     }
@@ -146,5 +152,6 @@ private fun commandUse(args: List<String>, POI: POI){
     }
 }
 private fun commandBack(args: List<String>, plr: Player){
-    plr.currentMenu = MenuType.NONE;
+    println("You are looking around the room again.");
+    plr.currentMenu = MenuType.ROOM; //don't go back all the way
 }

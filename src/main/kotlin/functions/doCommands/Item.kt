@@ -2,12 +2,13 @@ package functions.doCommands
 
 import classes.*
 import classes.item.*
+import functions.format.formatItemList
 import kotlin.math.round
 
 /**
  * Does a command based on the input
  */
-public fun doCommand(input: String, item: Item, plr: Player){
+public fun doCommandItem(input: String, item: Item, plr: Player){
     val arguments: List<String> = input.split(" ");
 
 
@@ -82,6 +83,8 @@ private fun commandConsume(args: List<String>, item: Item, plr: Player){
                 }
 
                 plr.inventory.remove(item); //remove item from inventory
+
+                plr.currentMenu = MenuType.INVENTORY; //selected item no longer exist so inventory
             }else{
                 println("You cannot eat when you are at full health.")
             }
@@ -100,15 +103,17 @@ private fun commandEquip(args: List<String>, plr: Player, item: Item){
             if (equippedItem == null){ //player is not yet wearing armor in that slot
                 plr.equipped[itemArmor.index] = item; //equip in slot
 
+                println("You equipped '${item.name}'.")
                 plr.inventory.remove(item); //remove from inventory
 
-                println("You equipped '${item.name}'.")
+                plr.currentMenu = MenuType.INVENTORY; //selected item no longer exist so inventory
             }else{ //player is already wearing something
                 plr.inventory.add( equippedItem ) //add into inventory
                 println("You unequipped '${equippedItem.name}' and equipped '${item.name}'.")
                 
                 plr.equipped[itemArmor.index] = item; //overwrite previously equipped item
                 plr.inventory.remove(item); //remove from inventory
+                plr.currentMenu = MenuType.INVENTORY; //selected item no longer exist so inventory
             }
         }else{ //equip is in usable commands, but no armorSlot is given
             println("You cannot equip '${item.name}'.")
@@ -118,5 +123,6 @@ private fun commandEquip(args: List<String>, plr: Player, item: Item){
     }
 }
 private fun commandBack(args: List<String>, plr: Player){
-    plr.currentMenu = MenuType.NONE;
+    println("You are back in your inventory.");
+    plr.currentMenu = MenuType.INVENTORY;
 }

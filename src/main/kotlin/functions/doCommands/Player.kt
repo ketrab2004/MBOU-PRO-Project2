@@ -73,57 +73,7 @@ private fun commandInventory(args: List<String>, plr: Player){
 
         println("What item would you like to interact with? ")
 
-        var chosen = false;
-        while (!chosen) {
-            print("- ") //line in front of where you type your choice
-            val read = readLine().toString()
-            when(read.toLowerCase()){
-
-                //exit out of loop
-                "leave" ->{ chosen = true; }
-                "back" ->{  chosen = true; }
-                "exit" ->{ chosen = true; }
-                "return" ->{ chosen = true; }
-
-                "help" ->{
-                    val padding: Int = 35; //using padEnd to add spaces to set a length, that way all the text lines up nicely
-                    println("Options:")
-                    println("- help".padEnd(padding)                            +"Shows all commands you can do.")
-                    println("- leave, back, exit, return".padEnd(padding)       +"Stop interacting with your inventory.")
-                    println("- inventory, inv, items".padEnd(padding)           +"Shows your inventory.")
-                    println("- { number }".padEnd(padding)                      +"Start interacting with said item.")
-                }
-
-                "inventory" ->{
-                    println(formatItemList(plr.inventory, "Inventory"));
-                }
-                "inv" ->{
-                    println(formatItemList(plr.inventory, "Inventory"));
-                }
-                "items" ->{
-                    println(formatItemList(plr.inventory, "Inventory"));
-                }
-
-                else ->{
-                    val input: Int? = read.toIntOrNull() //convert input to int (or null if not int)
-                    if (input != null){ //is number
-                        if (input <= plr.inventory.size && input >= 0){ //chose number in inventory
-                            chosen = true;
-                            plr.currentMenu = MenuType.INVENTORY
-                            plr.currentMenuIndex = input
-
-                        }else{
-                            println("You did not pick a valid index inside of your inventory.")
-                        }
-
-                    }else{ //is not a number
-                        println("You did not pick a valid number nor a valid command (type help for help)")
-                    }
-                }
-            }
-
-
-        }
+        plr.currentMenu = MenuType.INVENTORY;
     } //else inventory is empty so don't do anything
 }
 private fun commandRoom(args: List<String>, plr: Player){
@@ -133,60 +83,10 @@ private fun commandRoom(args: List<String>, plr: Player){
 
     println(formatPOIList(room.poiList, ""));
 
-    if (room.poiList.isNotEmpty()) { //if stuff in inventory change currentMenu
+    if (room.poiList.isNotEmpty()) { //if stuff in room change currentMenu
 
         println("What item would you like to interact with? ")
 
-        var chosen = false;
-        while (!chosen) {
-            print("- ") //line in front of where you type your choice
-            val read = readLine().toString()
-            when (read.toLowerCase()) {
-
-                //exit out of loop
-                "leave" -> {
-                    chosen = true; }
-                "back" -> {
-                    chosen = true; }
-                "exit" -> {
-                    chosen = true; }
-                "return" -> {
-                    chosen = true; }
-
-                "help" -> {
-                    val padding: Int =
-                        35; //using padEnd to add spaces to set a length, that way all the text lines up nicely
-                    println("Options:")
-                    println("- help".padEnd(padding) + "Shows all commands you can do.")
-                    println("- leave, back, exit, return".padEnd(padding) + "Stop interacting with ${room.name}.")
-                    println("- room, look".padEnd(padding) + "Shows your inventory.")
-                    println("- { number }".padEnd(padding) + "Start interacting with the chosen object.")
-                }
-
-                "room" -> {
-                    println(formatPOIList(room.poiList, room.name));
-                }
-                "look" -> {
-                    println(formatPOIList(room.poiList, room.name));
-                }
-
-                else -> {
-                    val input: Int? = read.toIntOrNull() //convert input to int (or null if not int)
-                    if (input != null) { //is number
-                        if (input <= room.poiList.size && input >= 0) { //chose number in inventory
-                            chosen = true;
-                            plr.currentMenu = MenuType.ROOM
-                            plr.currentMenuIndex = input
-
-                        } else {
-                            println("You did not pick a valid index inside of ${room.name}.")
-                        }
-
-                    } else { //is not a number
-                        println("You did not pick a valid number nor a valid command (type help for help)")
-                    }
-                }
-            }
-        }
+        plr.currentMenu = MenuType.ROOM;
     }
 }

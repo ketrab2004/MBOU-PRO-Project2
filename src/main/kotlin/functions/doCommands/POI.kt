@@ -4,8 +4,8 @@ import classes.MenuType
 import classes.Player
 import classes.item.Item
 import classes.poi.*
+import functions.checkForKey
 import functions.format.formatItemList
-import functions.format.formatPOIList
 
 public fun doCommandPOI(input: String, POI: POI, plr: Player){
     val arguments: List<String> = input.split(" ");
@@ -107,10 +107,31 @@ private fun commandOpen(args: List<String>, POI: POI, plr: Player){
         var content = POI.properties["Content"];
         if (content is MutableList<*>) {
             val isLocked = POI.properties["IsLocked"]
-            if (isLocked is Boolean) {
+            val key = POI.properties["Key"]
+            if (isLocked is Boolean && key is String) { //isLocked doesn't matter if no key given
                 if (isLocked) {
                     println("This '${POI.name}' is locked and needs to be unlocked before it can be opened.");
-                    //TODO loop through items to find the key
+
+                    val (hasKey, key) = checkForKey(plr, key);
+                    if (hasKey){
+                        if (key != null){
+                            println("You unlocked '${POI.name}' using '${key.name}'.")
+
+                            plr.currentMenu = MenuType.CONTAINER;
+                            //currentMenuIndex doesn't change
+
+                            @Suppress("UNCHECKED_CAST") //intelij :)
+                            println(formatItemList(content as List<Item>, POI.name));
+                        }else{
+                            println("You unlocked '${POI.name}'.") //unlocked but key is null somehow
+
+                            plr.currentMenu = MenuType.CONTAINER;
+                            //currentMenuIndex doesn't change
+
+                            @Suppress("UNCHECKED_CAST") //intelij :)
+                            println(formatItemList(content as List<Item>, POI.name));
+                        }
+                    } //you don't have a key so don't do anything
 
                 } else { //container is not locked
                     plr.currentMenu = MenuType.CONTAINER;

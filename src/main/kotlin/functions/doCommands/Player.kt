@@ -58,7 +58,12 @@ public fun doPlayerCommand(input: String, plr: Player){
             commandEquipment(arguments, plr);
         }
 
-        //Classes.Room aliases
+        //Say aliases
+        "say" ->{
+            commandSay(arguments);
+        }
+
+        //Room aliases
         "room" -> {
             commandRoom(arguments, plr)
         }
@@ -77,12 +82,13 @@ public fun doPlayerCommand(input: String, plr: Player){
 private fun commandHelp(args: List<String>, plr: Player){
     val padding: Int = 35; //using padEnd to add spaces to set a length, that way all the text lines up nicely
     println("Commands:")
-    println("* help".padEnd(padding)                   +"Shows all commands you can do.")
-    println("* exit, leave".padEnd(padding)            +"Closes the game.")
-    println("* stats, info".padEnd(padding)            +"Shows info about you (for example health).")
-    println("* inventory, inv, items".padEnd(padding)  +"Shows your inventory.")
-    println("* equipment, equip, armor".padEnd(padding)+"Shows your equipped items.")
-    println("* room, look".padEnd(padding)             +"Inspect/look around the current room.")
+    println("* help".padEnd(padding)                            +"Shows all commands you can do.")
+    println("* exit, leave".padEnd(padding)                     +"Closes the game.")
+    println("* stats, info".padEnd(padding)                     +"Shows info about you (for example health).")
+    println("* inventory, inv, items".padEnd(padding)           +"Shows your inventory.")
+    println("* equipment, equip, armor".padEnd(padding)         +"Shows your equipped items.")
+    println("* room, look".padEnd(padding)                      +"Inspect/look around the current room.")
+    println("* say { what you want to say }".padEnd(padding)    +"Say something")
 }
 private fun commandExit(args: List<String>){
     println("Are you sure you want to exit the game?\nY or N");
@@ -158,4 +164,24 @@ private fun commandStats(args: List<String>, plr: Player){
     println("Armor: $armor%")
 
     println("You have ${plr.inventory.size} items in your inventory.")
+}
+
+private fun commandSay(args: List<String>){
+    if (args.size > 1) {
+        var whatYouSaid = args[1] //skip 0 because it
+
+        if (args.size > 2) { //if you say more than 1 word loop through them
+            for (i in 2..args.size -1) { //skip command and first word
+                whatYouSaid += " ${args[i]}"
+            }
+        }
+
+        if (whatYouSaid.isBlank()){ //if you say a bunch of spaces
+            println("You say nothing.")
+        }else{ //you did say something
+            println("You say '$whatYouSaid'.");
+        }
+    }else{
+        println("You say nothing.")
+    }
 }

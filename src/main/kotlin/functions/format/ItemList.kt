@@ -10,7 +10,7 @@ import classes.item.Item
  * @return A string with line breaks, use println() to print it.
  * (only use print() if you know that the current line is empty)
  */
-public fun formatItemList(itemList: List<Item>, title: String) : String{
+public fun formatItemList(itemList: List<Item?>, title: String) : String{
     if (itemList.isEmpty()){ //when empty avoid all normal steps
         val content = " * empty * "
         val length = Math.max(title.length +2, content.length) //length is either content or title+2 (so title has a couple stripes)
@@ -26,8 +26,14 @@ public fun formatItemList(itemList: List<Item>, title: String) : String{
     var longestItemName: Int = 0;
 
     itemList.forEach(){ //find how long longest item name is in itemList
-        if(it.name.length > longestItemName){
-            longestItemName = it.name.length;
+        if(it != null) { //if item is set
+            if (it.name.length > longestItemName) {
+                longestItemName = it.name.length;
+            }
+        }else{ //if item is null then check if "* none *" is longer than longest item name
+            if ("* none *".length > longestItemName){
+                longestItemName = "* none *".length;
+            }
         }
     }
 
@@ -50,9 +56,14 @@ public fun formatItemList(itemList: List<Item>, title: String) : String{
     //subtract 1 because each item ends on " | " which has an extra space at the end which doesn't need a - above it
 
     itemList.forEachIndexed { index, element ->
+        var name = "* none *"
+        if (element != null){ //if item exists, otherwise name is none
+            name = element.name;
+        }
+
         toReturn+= ("$index. " //number of item
             .padEnd(numberLength) //add spaces to make it numberlength long
-                +element.name) //add name of item
+                +name) //add name of item
             .padEnd(longestItemName + extraLength - 3) +" | "
         //add spaces so that combined text is longestItemName + extraLength (which is number + numberLength)
         //subtract 3 because " | " is 3 long

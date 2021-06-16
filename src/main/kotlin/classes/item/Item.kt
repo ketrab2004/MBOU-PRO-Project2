@@ -16,7 +16,7 @@ class Item(val name: String, val description: String, val maxStackSize: Int) {
      */
     var properties: MutableMap<String, Any> = mutableMapOf(); //like NBT tags in Minecraft
 
-    var amount: Int = 1;
+    var amount: Int = maxStackSize;
 
     //static stuff goes in here
     companion object {

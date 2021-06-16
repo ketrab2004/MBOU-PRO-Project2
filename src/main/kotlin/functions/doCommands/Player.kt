@@ -3,6 +3,7 @@ package functions.doCommands
 import classes.MenuType
 import classes.Player
 import classes.Room
+import classes.item.Item
 import functions.format.formatItemList
 import functions.format.formatPOIList
 import kotlin.system.exitProcess
@@ -20,10 +21,10 @@ public fun doPlayerCommand(input: String, plr: Player){
 
         //Exit aliases
         "exit" -> {
-            commandExit(arguments, plr)
+            commandExit(arguments)
         }
         "leave" -> {
-            commandExit(arguments, plr)
+            commandExit(arguments)
         }
 
         //Inventory aliases
@@ -35,6 +36,17 @@ public fun doPlayerCommand(input: String, plr: Player){
         }
         "items" -> {
             commandInventory(arguments, plr)
+        }
+
+        //equipment aliases
+        "equipment" ->{
+            commandEquipment(arguments, plr);
+        }
+        "equip" ->{
+            commandEquipment(arguments, plr);
+        }
+        "armor" ->{
+            commandEquipment(arguments, plr);
         }
 
         //Classes.Room aliases
@@ -59,23 +71,41 @@ private fun commandHelp(args: List<String>, plr: Player){
     println("* help".padEnd(padding)                   +"Shows all commands you can do.")
     println("* exit, leave".padEnd(padding)            +"Closes the game.")
     println("* inventory, inv, items".padEnd(padding)  +"Shows your inventory.")
+    println("* equipment, equip, armor".padEnd(padding)+"Shows your equipped items.")
     println("* room, look".padEnd(padding)             +"Inspect/look around the current room.")
 }
-private fun commandExit(args: List<String>, plr: Player){
-    //TODO add: are you sure? and bye bye
+private fun commandExit(args: List<String>){
+    println("Are you sure you want to exit the game?\nY or N");
 
-    exitProcess(0)
+    val input = readLine()!!.toLowerCase();
+
+    if (input == "y" || input == "yes"){
+        println("bye bye :'(")
+        exitProcess(0)
+    }else{
+        println("You typed '${input.toUpperCase()}' which wasn't Y,\nso not closing the game...")
+    }
 }
 private fun commandInventory(args: List<String>, plr: Player){
     println(formatItemList(plr.inventory, "Inventory"));
 
     if (plr.inventory.isNotEmpty()){ //if stuff in inventory change currentMenu
 
-        println("What item would you like to interact with? ")
+        println("What item would you like to interact with?")
 
         plr.currentMenu = MenuType.INVENTORY;
     } //else inventory is empty so don't do anything
 }
+private fun commandEquipment(args: List<String>, plr: Player){
+    println(formatItemList(plr.equipped.toList(), "Equipment"))
+
+    if (plr.equipped.isNotEmpty()){ //if has equipment
+        println("What equipped item would you like to interact with?")
+
+        plr.currentMenu = MenuType.EQUIPMENT;
+    }
+}
+
 private fun commandRoom(args: List<String>, plr: Player){
     val room = GlobalGameMap.gameMap[plr.currentLevel][plr.currentRoom];
     println(room.name);

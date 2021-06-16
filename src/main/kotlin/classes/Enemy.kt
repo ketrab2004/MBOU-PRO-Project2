@@ -26,4 +26,22 @@ open class Enemy(
 
         return toReturn;
     }
+
+    /**
+     * Calculates how much damage gets protected with the currently equipped armor and returns it
+     */
+    public fun calcArmorPerc(): Float{
+        var damage = 1f;
+
+        this.equipped.forEachIndexed(){ index, item ->
+            if (item != null){ //because item is item?
+                val armorPerc = item.properties["ArmorPerc"];
+                if (armorPerc is Float) {
+                    damage -= damage * armorPerc; //remove armorPerc of damage from damage
+                }
+            }
+        }
+
+        return 1-damage; //amount of damage not taken
+    }
 }

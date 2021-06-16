@@ -82,9 +82,16 @@ private fun commandConsume(args: List<String>, item: Item, plr: Player){
                     println("You are now at full health.")
                 }
 
-                plr.inventory.remove(item); //remove item from inventory
+                item.amount --; //remove 1 item
 
-                plr.currentMenu = MenuType.INVENTORY; //selected item no longer exist so inventory
+                if (item.amount <= 0) { //item is empty
+                    plr.inventory.remove(item); //remove item from inventory
+
+                    plr.currentMenu = MenuType.INVENTORY; //selected item no longer exist so go to inventory
+                }else
+                {
+                    println("You have ${item.amount} ${item.name}s left.") //still have items left
+                }
             }else{
                 println("You cannot eat when you are at full health.")
             }

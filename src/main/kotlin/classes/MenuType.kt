@@ -37,6 +37,16 @@ enum class MenuType() {
      */
     IN_CONTAINER,
 
+    /**
+     * Looking through your equipment
+     */
+    EQUIPMENT,
+
+    /**
+     * After having chosen an item from your equipment
+     */
+    IN_EQUIPMENT,
+
 
     BATTLE
 }

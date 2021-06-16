@@ -68,6 +68,20 @@ fun main(args: Array<String>) {
                 doCommandIn_Container(readLine().toString(), player, inventory, poi);
             }
 
+            MenuType.EQUIPMENT ->{
+                print("- ") // - to type command after
+                doCommandEquipment(readLine().toString(), player)
+            }
+            MenuType.IN_EQUIPMENT ->{
+                var name = ""
+                val item = player.equipped[player.currentMenuIndex]
+                if (item != null){ //check because item is item?
+                    name = item.name;
+                }
+                print("$name - ") //print item name - to type command after
+                doCommandIn_Equipment(readLine().toString(), player)
+            }
+
             MenuType.BATTLE ->{
                 print("\${enemy.name} * ") //print enemy name * to type command after
                 readLine().toString() //TODO surround with BATTLE do Command

@@ -81,23 +81,34 @@ private fun commandInspect(args: List<String> , POIClass: POI){
     println(POIClass.description)
 }
 private fun commandEnter(args: List<String>, POI: POI, plr: Player){
-    if(POI.usableCommands.contains(PossiblePOICommands.ENTER)) { //consume is a usable command
-        val isLocked = POI.properties["IsLocked"]
-        if (isLocked is Boolean){
-            if (isLocked){
-                println("This '${POI.name}' is locked and needs to be unlocked before it can be entered.");
-                //TODO loop through items to find the key
+    if(POI.usableCommands.contains(PossiblePOICommands.ENTER)) { //enter is a usable command
+        val targetRoom = POI.properties["TargetRoom"]
+        val targetLevel = POI.properties["TargetLevel"]
 
-                plr.currentMenu = MenuType.NONE; //go back after entering
+        if (targetRoom is Int && targetLevel is Int){ //if targetroom and level are set
+            val isLocked = POI.properties["IsLocked"]
+            if (isLocked is Boolean){
+                if (isLocked){
+                    println("This '${POI.name}' is locked and needs to be unlocked before it can be entered.");
+                    //TODO loop through items to find the key
 
+                    plr.currentMenu = MenuType.NONE; //go back after entering
+
+                }else{ //door is not locked
+                    //TODO use staircase/door
+                    plr.currentLevel = targetLevel;
+                    plr.currentRoom = targetRoom;
+                    plr.currentMenu = MenuType.ROOM; //go back aftecurrentLevelr entering
+                }
             }else{ //door is not locked
                 //TODO use staircase/door
-
-                plr.currentMenu = MenuType.NONE; //go back after entering
             }
-        }else{ //door is not locked
-            //TODO use staircase/door
         }
+        else
+        {
+            println("You cannot enter '${POI.name}'. [ERROR: Room or level not set]")
+        }
+
     }else {
         println("You cannot enter '${POI.name}'.")
     }

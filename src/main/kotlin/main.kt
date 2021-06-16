@@ -18,9 +18,7 @@ fun main(args: Array<String>) {
     player.inventory.add(Item("Item 13", "foo", 1))
     player.inventory.add(Item("Item 4", "bar", 1))
 
-    player.takeDamage(null);
-    player.takeDamage(null);
-    player.takeDamage(null);
+    player.health *= .75f; //set health to low
     // endregion
 
     println("You, ${player.name}, enter Dracula's castle.")

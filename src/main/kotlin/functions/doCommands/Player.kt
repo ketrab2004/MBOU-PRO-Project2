@@ -1,5 +1,6 @@
 package functions.doCommands
 
+import GlobalGameMap
 import classes.MenuType
 import classes.Player
 import classes.Room
@@ -25,6 +26,14 @@ public fun doPlayerCommand(input: String, plr: Player){
         }
         "leave" -> {
             commandExit(arguments)
+        }
+
+        //Stats aliases
+        "stats" -> {
+            commandStats(arguments, plr);
+        }
+        "info" -> {
+            commandStats(arguments, plr);
         }
 
         //Inventory aliases
@@ -70,6 +79,7 @@ private fun commandHelp(args: List<String>, plr: Player){
     println("Commands:")
     println("* help".padEnd(padding)                   +"Shows all commands you can do.")
     println("* exit, leave".padEnd(padding)            +"Closes the game.")
+    println("* stats, info".padEnd(padding)            +"Shows info about you (for example health).")
     println("* inventory, inv, items".padEnd(padding)  +"Shows your inventory.")
     println("* equipment, equip, armor".padEnd(padding)+"Shows your equipped items.")
     println("* room, look".padEnd(padding)             +"Inspect/look around the current room.")
@@ -119,4 +129,33 @@ private fun commandRoom(args: List<String>, plr: Player){
 
         plr.currentMenu = MenuType.ROOM;
     }
+}
+
+private fun commandStats(args: List<String>, plr: Player){
+
+    var floor = "ground floor"
+    val cLevel = plr.currentLevel
+    if (cLevel != 0){
+        when(cLevel){ //switch case for floor name
+            // 0 is ground floor
+            1 -> {  floor = "1st floor" }
+            2 -> {  floor = "2nd floor" }
+            3 -> {  floor = "3rd floor" }
+            else ->{floor = "${cLevel}th floor"} //above 3rd is 4th, 5th, 6th, 7th etc.
+        }
+    }
+
+    //You are on the ground floor, in the main hallway.
+    println("You are on the $floor, in ${GlobalGameMap.gameMap[cLevel][plr.currentRoom].name}.")
+
+    //health: ❤❤❤❤❤❤💔💔💔💔
+    val heartCount = 15; //amount of hearts to show
+    val health: Int = Math.round( (plr.health / plr.maxHealth)* heartCount );
+    println("Health: " + "❤".repeat(health) + "\uD83D\uDC94".repeat(heartCount - health) ) //repeat instead of padEnd because the emoijs are too long (bytes)
+
+    //Armor: 12%
+    val armor = Math.round(plr.calcArmorPerc() * 100); //*100 to go from 0-1 to 0-100
+    println("Armor: $armor%")
+
+    println("You have ${plr.inventory.size} items in your inventory.")
 }

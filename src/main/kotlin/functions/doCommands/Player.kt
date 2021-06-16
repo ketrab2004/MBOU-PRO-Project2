@@ -161,7 +161,7 @@ private fun commandStats(args: List<String>, plr: Player){
 
     //Armor: 12%
     val armor = Math.round(plr.calcArmorPerc() * 100); //*100 to go from 0-1 to 0-100
-    println("Armor: $armor%")
+    println("Armor:  $armor%")
 
     println("You have ${plr.inventory.size} items in your inventory.")
 }

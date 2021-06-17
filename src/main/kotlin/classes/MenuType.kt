@@ -48,5 +48,14 @@ enum class MenuType() {
     IN_EQUIPMENT,
 
 
-    BATTLE
+    /**
+     * Looking through the weapons you can use
+     */
+    ATTACK,
+
+    /**
+     * After having chosen an weapon to attack with
+     * (choosing an enemy to attack)
+     */
+    IN_ATTACK
 }

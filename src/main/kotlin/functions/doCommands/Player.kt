@@ -5,8 +5,10 @@ import classes.MenuType
 import classes.Player
 import classes.Room
 import classes.item.Item
+import functions.format.formatEnemyList
 import functions.format.formatItemList
 import functions.format.formatPOIList
+import functions.getWeapons
 import kotlin.system.exitProcess
 
 /**
@@ -71,6 +73,25 @@ public fun doPlayerCommand(input: String, plr: Player){
             commandRoom(arguments, plr)
         }
 
+        //attack aliases
+        "attack" -> {
+            commandAttack(arguments, plr);
+        }
+        "fight" -> {
+            commandAttack(arguments, plr);
+        }
+
+        //enemy aliases
+        "enemy" -> {
+            commandEnemies(arguments, plr);
+        }
+        "enemies" -> {
+            commandEnemies(arguments, plr);
+        }
+        "opponents" -> {
+            commandEnemies(arguments, plr);
+        }
+
 
         else -> {
             println("⚠️'${arguments[0]}' is not a known command")
@@ -87,7 +108,12 @@ private fun commandHelp(args: List<String>, plr: Player){
     println("* stats, info".padEnd(padding)                     +"Shows info about you (for example health).")
     println("* inventory, inv, items".padEnd(padding)           +"Shows your inventory.")
     println("* equipment, equip, armor".padEnd(padding)         +"Shows your equipped items.")
-    println("* room, look".padEnd(padding)                      +"Inspect/look around the current room.")
+    if (plr.battleMode){ //only show while in battle mode
+        println("* enemy, enemies, opponents".padEnd(padding)   +"Shows enemies so you can inspect them.")
+        println("* attack, fight".padEnd(padding)               +"Shows your weapons and lets you use them.")
+    }else{ //only show when not in battle mode
+        println("* room, look".padEnd(padding)                  +"Inspect/look around the current room.")
+    }
     println("* say { what you want to say }".padEnd(padding)    +"Say something")
 }
 private fun commandExit(args: List<String>){
@@ -123,17 +149,21 @@ private fun commandEquipment(args: List<String>, plr: Player){
 }
 
 private fun commandRoom(args: List<String>, plr: Player){
-    val room = GlobalGameMap.gameMap[plr.currentLevel][plr.currentRoom];
-    println(room.name);
-    println(room.description);
+    if (!plr.battleMode) {
+        val room = GlobalGameMap.gameMap[plr.currentLevel][plr.currentRoom];
+        println(room.name);
+        println(room.description);
 
-    println(formatPOIList(room.poiList, ""));
+        println(formatPOIList(room.poiList, ""));
 
-    if (room.poiList.isNotEmpty()) { //if stuff in room change currentMenu
+        if (room.poiList.isNotEmpty()) { //if stuff in room change currentMenu
 
-        println("What item would you like to interact with? ")
+            println("What item would you like to interact with? ")
 
-        plr.currentMenu = MenuType.ROOM;
+            plr.currentMenu = MenuType.ROOM;
+        }
+    }else{
+        println("You cannot interact with the room while you are fighting enemies.")
     }
 }
 
@@ -185,3 +215,54 @@ private fun commandSay(args: List<String>){
         println("You say nothing.")
     }
 }
+//region battle mode commands
+private fun commandAttack(args: List<String>, plr: Player){
+    if (!plr.battleMode){
+        println("There are no enemies to attack.")
+    }else{
+        val (weapons, _) = getWeapons(plr.inventory);
+        println(formatItemList(weapons, "Weapons"))
+        if (weapons.size > 0) {
+            println("Pick your weapon.")
+
+            plr.currentMenu = MenuType.ATTACK;
+        }else{
+            println("You have no weapons so you use your fists.")
+
+            plr.currentMenuIndex = -1;
+            plr.currentMenu = MenuType.IN_ATTACK;
+        }
+    }
+}
+private fun commandEnemies(args: List<String>, plr: Player){
+    if (plr.battleMode){
+        val room = GlobalGameMap.gameMap[plr.currentLevel][plr.currentRoom]
+
+        var number: Int? = null;
+        if (args.size >= 2){
+            number = args[1].toIntOrNull();
+        }
+
+        if (number == null){
+            println(formatEnemyList(room.enemyList, room.name))
+            println("""
+            You can inspect an enemy by giving the index of the enemy after enemy.
+            For example:
+            * enemy 0
+            will return the description of ${room.enemyList[0].name}""".trimIndent())
+        }else if (number < room.enemyList.size && number >= 0) {//gave a number of enemy to inspect
+            val enemy = room.enemyList[number]
+            println("You inspect ${enemy.name}.")
+            println(enemy.description);
+
+            val armor: Int = Math.round(plr.calcArmorPerc() * 1000) /10;
+            //*100 to go from 0-1 to 0-1000 then divide so it is 0-100 but 13% will be rounded to 10%
+            println("Armor:  $armor%")
+        }else{
+            println("$number is not an index of an enemy you can inspect.")
+        }
+    }else{
+        println("There are no enemies to inspect.")
+    }
+}
+//endregion

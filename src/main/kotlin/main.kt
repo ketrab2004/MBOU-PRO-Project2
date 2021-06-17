@@ -26,6 +26,10 @@ fun main(args: Array<String>) {
     println("What will you do? (type help for help)")
 
     while (true){ //game loop
+        if (player.battleMode){
+            print("❗ ") //print a ❗ in front of everything while you are in battle mode
+        }
+
         when(player.currentMenu){
             MenuType.NONE ->{
                 print("* ") //print * to type command after
@@ -78,9 +82,21 @@ fun main(args: Array<String>) {
                 doCommandIn_Equipment(readLine().toString(), player)
             }
 
-            MenuType.BATTLE ->{
-                print("\${enemy.name} * ") //print enemy name * to type command after
-                readLine().toString() //TODO surround with BATTLE do Command
+            MenuType.ATTACK ->{
+                print("- ") // - to type command after
+                doCommandAttack(readLine().toString(), player)
+            }
+            MenuType.IN_ATTACK ->{
+                val room = GlobalGameMap.gameMap[player.currentLevel][player.currentRoom]
+                var weapon: Item? = null
+
+                var weaponName = "Your fists"
+                if (player.currentMenuIndex != -1){
+                    weapon = player.inventory[player.currentMenuIndex]
+                    weaponName = weapon.name
+                }
+                print("$weaponName - ") //print weapon name * to type command after
+                doCommandIn_Attack(readLine().toString(), player, room, weapon);
             }
         }
     }

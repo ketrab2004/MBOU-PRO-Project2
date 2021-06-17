@@ -49,8 +49,8 @@ open class Enemy(
     /**
      * Take damage based on the enemies armor and used weapon
      * @return a pair which contains 2 values
-     * * damage done [Float] (pair.a)
-     * * whether the enemy survived [Boolean] (pair.b)
+     * * damage done [Float] (pair.first)
+     * * whether the enemy was killed [Boolean] (pair.second)
      */
     public fun takeDamage(weapon: Item?): Pair<Float, Boolean>{
         var damage = 1f;
@@ -69,7 +69,7 @@ open class Enemy(
         health -= damage; //do damage
 
         //return damage and
-        //whether enemy is alive (health > 0)
-        return Pair(damage, health > 0);
+        //whether enemy was killed (health <= 0)
+        return Pair(damage, health <= 0);
     }
 }

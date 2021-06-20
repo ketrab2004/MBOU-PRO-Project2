@@ -4,6 +4,7 @@ import classes.MenuType
 import classes.Player
 import classes.item.Item
 import classes.poi.*
+import functions.checkForEnemies
 import functions.checkForKey
 import functions.format.formatItemList
 
@@ -85,26 +86,62 @@ private fun commandEnter(args: List<String>, POI: POI, plr: Player){
         val targetRoom = POI.properties["TargetRoom"]
         val targetLevel = POI.properties["TargetLevel"]
 
-        if (targetRoom is Int && targetLevel is Int){ //if targetroom and level are set
+        //if targetroom and level are set
+        //or
+        //if targetRoom is set and poi is a door
+        if (targetRoom is Int && targetLevel is Int || targetRoom is Int && POI.type == POIType.DOOR){
             val isLocked = POI.properties["IsLocked"]
-            if (isLocked is Boolean){
+            val key = POI.properties["Key"]
+            if (isLocked is Boolean && key is String) { //isLocked doesn't matter if no key given
                 if (isLocked){
                     println("This '${POI.name}' is locked and needs to be unlocked before it can be entered.");
                     //TODO loop through items to find the key
 
-                    plr.currentMenu = MenuType.NONE; //go back after entering
+                    val (hasKey, key) = checkForKey(plr, key);
+                    if (hasKey){
+                        if (key != null){
+                            println("You unlocked '${POI.name}' using '${key.name}'.")
+
+                            if (targetLevel is Int){ //only if poi is not a door, thus a staircase
+                                plr.currentLevel = targetLevel;
+                            }
+                            plr.currentRoom = targetRoom;
+                            plr.currentMenu = MenuType.ROOM; //go back after entering
+
+                            checkForEnemies(plr) //check for enemies, go into battle mode if there are enemies
+                        }else{
+                            println("You unlocked '${POI.name}'.") //unlocked but key is null somehow
+
+                            if (targetLevel is Int){ //only if poi is not a door, thus a staircase
+                                plr.currentLevel = targetLevel;
+                            }
+                            plr.currentRoom = targetRoom;
+                            plr.currentMenu = MenuType.ROOM; //go back after entering
+
+                            checkForEnemies(plr) //check for enemies, go into battle mode if there are enemies
+                        }
+                    } //you don't have a key so don't do anything
+                    //(already showed text saying that it's locked)
 
                 }else{ //door is not locked
-                    //TODO use staircase/door
-                    plr.currentLevel = targetLevel;
+                    if (targetLevel is Int){ //only if poi is not a door, thus a staircase
+                        plr.currentLevel = targetLevel;
+                    }
                     plr.currentRoom = targetRoom;
-                    plr.currentMenu = MenuType.ROOM; //go back aftecurrentLevelr entering
+                    plr.currentMenu = MenuType.ROOM; //go back after entering
+
+                    checkForEnemies(plr) //check for enemies, go into battle mode if there are enemies
                 }
             }else{ //door is not locked
-                //TODO use staircase/door
+                if (targetLevel is Int){ //only if poi is not a door, thus a staircase
+                    plr.currentLevel = targetLevel;
+                }
+                plr.currentRoom = targetRoom;
+                plr.currentMenu = MenuType.ROOM; //go back after entering
+
+                checkForEnemies(plr) //check for enemies, go into battle mode if there are enemies
             }
-        }
-        else
+        } else
         {
             println("You cannot enter '${POI.name}'. [ERROR: Room or level not set]")
         }

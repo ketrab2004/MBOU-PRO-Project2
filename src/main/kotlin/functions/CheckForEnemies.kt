@@ -9,7 +9,7 @@ import functions.format.formatEnemyList
  * @param[plr] player whose inventory to search
  * @return true if there are enemies
  */
-public fun checkForEnemies(plr: Player, key: String): Boolean{
+public fun checkForEnemies(plr: Player): Boolean{
     val room = GlobalGameMap.gameMap[plr.currentLevel][plr.currentRoom];
     if(room.enemyList.size > 0){ //there are enemies
 

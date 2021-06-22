@@ -67,12 +67,17 @@ open class POI (val name: String, val description: String){
          * Creates a container poi and returns it
          * @param[content] mutableList (so items can be removed from it) of Items
          */
-        public fun createContainer(name: String, description: String, content: MutableList<Item>): POI {
+        public fun createContainer(name: String, description: String, content: MutableList<Item>, key: String?): POI {
             var poi = POI(name, description);
 
             poi.properties["Content"] = content;
             poi.type = POIType.CONTAINER;
             poi.usableCommands+= PossiblePOICommands.OPEN;
+
+            if (key != null){ //if key is given
+                poi.properties["Key"] = key;
+                poi.properties["IsLocked"] = true;
+            }
 
             return poi;
         }

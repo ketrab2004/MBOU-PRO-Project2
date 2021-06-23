@@ -88,7 +88,7 @@ class GlobalGameMap {
                     POI.createDoor("Bathroom door", "It has a sign stating '\uD835\uDCAA\uD835\uDCCA\uD835\uDCC9 \uD835\uDC5C\uD835\uDCBB \uD835\uDCC8\uD835\uDC52\uD835\uDCC7\uD835\uDCCB\uD835\uDCBE\uD835\uDCB8\uD835\uDC52'.",
                         0, "!unlockable"),
                     POI.createDoor("Staircase closet", "A closet under the staircase.", 2, null),
-                    POI.createStaircase("Staircase", "A staircase leading to the first floor.", 0, 1, null)
+                    POI.createStaircase("Staircase", "A staircase leading to the first floor.", 1, 0, null)
                 )
             )
             //endregion room0 main room
@@ -115,7 +115,7 @@ class GlobalGameMap {
 
             //region room2 staircase closet
             var f0staircaseCloset =
-                Room("Living room", "A large living room with fancy curtains blocking the windows.")
+                Room("Staircase closet", "A small room underneath the staircase.")
 
             f0staircaseCloset.poiList.addAll(
                 listOf( //listOf only for the addAll function

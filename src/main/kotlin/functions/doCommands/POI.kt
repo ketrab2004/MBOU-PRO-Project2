@@ -7,6 +7,7 @@ import classes.poi.*
 import functions.checkForEnemies
 import functions.checkForKey
 import functions.format.formatItemList
+import functions.getFloor
 
 public fun doCommandPOI(input: String, POI: POI, plr: Player){
     val arguments: List<String> = input.split(" ");
@@ -84,9 +85,9 @@ private fun commandInspect(args: List<String> , POIClass: POI){
 private fun commandEnter(args: List<String>, POI: POI, plr: Player){
     if(POI.usableCommands.contains(PossiblePOICommands.ENTER)) { //enter is a usable command
         val targetRoom = POI.properties["TargetRoom"]
-        val targetLevel = POI.properties["TargetLevel"]
+        val targetLevel = POI.properties["TargetFloor"]
 
-        //if targetroom and level are set
+        //if targetroom and floor are set
         //or
         //if targetRoom is set and poi is a door
         if (targetRoom is Int && targetLevel is Int || targetRoom is Int && POI.type == POIType.DOOR){
@@ -95,28 +96,37 @@ private fun commandEnter(args: List<String>, POI: POI, plr: Player){
             if (isLocked is Boolean && key is String) { //isLocked doesn't matter if no key given
                 if (isLocked){
                     println("This '${POI.name}' is locked and needs to be unlocked before it can be entered.");
-                    //TODO loop through items to find the key
 
                     val (hasKey, key) = checkForKey(plr, key);
                     if (hasKey){
                         if (key != null){
-                            println("You unlocked '${POI.name}' using '${key.name}'.")
+                            println("You unlocked '${POI.name}' using '${key.name}' and enter.")
 
+                            print("You are now ")
                             if (targetLevel is Int){ //only if poi is not a door, thus a staircase
                                 plr.currentLevel = targetLevel;
+
+                                print("on the ${getFloor(plr)} ") //add extra on floor inbetween if changed floors
                             }
+                            print("in ${GlobalGameMap.gameMap[plr.currentLevel][targetRoom].name}.\n")
+
                             plr.currentRoom = targetRoom;
-                            plr.currentMenu = MenuType.ROOM; //go back after entering
+                            plr.currentMenu = MenuType.NONE; //go back after entering
 
                             checkForEnemies(plr) //check for enemies, go into battle mode if there are enemies
                         }else{
-                            println("You unlocked '${POI.name}'.") //unlocked but key is null somehow
+                            println("You unlocked '${POI.name}' and enter.") //unlocked but key is null somehow
 
+                            print("You are now ")
                             if (targetLevel is Int){ //only if poi is not a door, thus a staircase
                                 plr.currentLevel = targetLevel;
+
+                                print("on the ${getFloor(plr)} ") //add extra on floor inbetween if changed floors
                             }
+                            print("in ${GlobalGameMap.gameMap[plr.currentLevel][targetRoom].name}.\n")
+
                             plr.currentRoom = targetRoom;
-                            plr.currentMenu = MenuType.ROOM; //go back after entering
+                            plr.currentMenu = MenuType.NONE; //go back after entering
 
                             checkForEnemies(plr) //check for enemies, go into battle mode if there are enemies
                         }
@@ -124,20 +134,30 @@ private fun commandEnter(args: List<String>, POI: POI, plr: Player){
                     //(already showed text saying that it's locked)
 
                 }else{ //door is not locked
+                    print("You are now ")
                     if (targetLevel is Int){ //only if poi is not a door, thus a staircase
                         plr.currentLevel = targetLevel;
+
+                        print("on the ${getFloor(plr)} ") //add extra on floor inbetween if changed floors
                     }
+                    print("in ${GlobalGameMap.gameMap[plr.currentLevel][targetRoom].name}.\n")
+
                     plr.currentRoom = targetRoom;
-                    plr.currentMenu = MenuType.ROOM; //go back after entering
+                    plr.currentMenu = MenuType.NONE; //go back after entering
 
                     checkForEnemies(plr) //check for enemies, go into battle mode if there are enemies
                 }
-            }else{ //door is not locked
+            }else{ //door is not locked (no key set/ islocked not set)
+                print("You are now ")
                 if (targetLevel is Int){ //only if poi is not a door, thus a staircase
                     plr.currentLevel = targetLevel;
+
+                    print("on the ${getFloor(plr)} ") //add extra on floor inbetween if changed floors
                 }
+                print("in ${GlobalGameMap.gameMap[plr.currentLevel][targetRoom].name}.\n")
+
                 plr.currentRoom = targetRoom;
-                plr.currentMenu = MenuType.ROOM; //go back after entering
+                plr.currentMenu = MenuType.NONE; //go back after entering
 
                 checkForEnemies(plr) //check for enemies, go into battle mode if there are enemies
             }

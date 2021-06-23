@@ -8,6 +8,7 @@ import classes.item.Item
 import functions.format.formatEnemyList
 import functions.format.formatItemList
 import functions.format.formatPOIList
+import functions.getFloor
 import functions.getWeapons
 import kotlin.system.exitProcess
 
@@ -169,17 +170,8 @@ private fun commandRoom(args: List<String>, plr: Player){
 
 private fun commandStats(args: List<String>, plr: Player){
 
-    var floor = "ground floor"
+    var floor = getFloor(plr);
     val cLevel = plr.currentLevel
-    if (cLevel != 0){
-        when(cLevel){ //switch case for floor name
-            // 0 is ground floor
-            1 -> {  floor = "1st floor" }
-            2 -> {  floor = "2nd floor" }
-            3 -> {  floor = "3rd floor" }
-            else ->{floor = "${cLevel}th floor"} //above 3rd is 4th, 5th, 6th, 7th etc.
-        }
-    }
 
     //You are on the ground floor, in the main hallway.
     println("You are on the $floor, in ${GlobalGameMap.gameMap[cLevel][plr.currentRoom].name}.")

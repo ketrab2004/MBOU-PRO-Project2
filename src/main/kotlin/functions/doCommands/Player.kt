@@ -246,7 +246,7 @@ private fun commandEnemies(args: List<String>, plr: Player){
             println("""
             You can inspect an enemy by giving the index of the enemy after enemy.
             For example:
-            * enemy 0
+            < * > enemy 0
             will return the description of ${room.enemyList[0].name}""".trimIndent())
         }else if (number < room.enemyList.size && number >= 0) {//gave a number of enemy to inspect
             val enemy = room.enemyList[number]

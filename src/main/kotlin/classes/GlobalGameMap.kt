@@ -583,7 +583,8 @@ class GlobalGameMap {
             f4enemyChef.equipped[0] = f4chefHat
             f4enemyChef.equipped[4] = Item.createWearable("","",ItemArmorSlot.OFFHAND, .15f) //secret armor you cannot obtain
             f4enemyChef.inventory.addAll(
-                listOf(f4key, f4chefHat)
+                listOf(f4key, f4chefHat,
+                    Item.createWeapon("Chef's spatula", "The spatula of Dracula's chef.", 5f))
             )
 
             f4chef.enemyList.add(f4enemyChef)

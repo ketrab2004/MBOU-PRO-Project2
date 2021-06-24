@@ -34,12 +34,12 @@ fun main(args: Array<String>) {
 
         when(player.currentMenu){
             MenuType.NONE ->{
-                print("<*> ") //print <*> to type command after
+                print("< * > ") //print < * > to type command after
                 doPlayerCommand(readLine().toString(), player)
             }
 
             MenuType.INVENTORY ->{ //look through your inventory to pick an item
-                print("<-> ") // <-> to type command after
+                print("< - > ") // < - > to type command after
                 doCommandInventory(readLine().toString(), player)
             }
             MenuType.IN_INVENTORY ->{ //When you have selected an item inside of your inventory
@@ -49,7 +49,7 @@ fun main(args: Array<String>) {
             }
 
             MenuType.ROOM ->{ //look through current room to pick a poi
-                print("<-> ") // <-> to type command after
+                print("< - > ") // < - > to type command after
                 doCommandRoom(readLine().toString(), player)
             }
             MenuType.IN_ROOM ->{
@@ -71,7 +71,7 @@ fun main(args: Array<String>) {
             }
 
             MenuType.EQUIPMENT ->{
-                print("<-> ") // <-> to type command after
+                print("< - > ") // < - > to type command after
                 doCommandEquipment(readLine().toString(), player)
             }
             MenuType.IN_EQUIPMENT ->{
@@ -85,7 +85,7 @@ fun main(args: Array<String>) {
             }
 
             MenuType.ATTACK ->{
-                print("<-> ") // <-> to type command after
+                print("< - > ") // < - > to type command after
                 doCommandAttack(readLine().toString(), player)
             }
             MenuType.IN_ATTACK ->{

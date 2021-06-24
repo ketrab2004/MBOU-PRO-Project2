@@ -68,7 +68,7 @@ private fun commandAttack(args: List<String>, room: Room, weapon: Item?, plr: Pl
         number = 0; }
 
     if (number != null) { //is number
-        if (number <= room.enemyList.size && number >= 0) { //chose number in inventory
+        if (number < room.enemyList.size && number >= 0) { //chose number in inventory
 
             val enemy = room.enemyList[number];
             val (damage, killed) = enemy.takeDamage(weapon)
@@ -77,7 +77,7 @@ private fun commandAttack(args: List<String>, room: Room, weapon: Item?, plr: Pl
                 println("You killed ${enemy.name} after doing $damage damage!")
 
                 if (enemy.inventory.size == 1){ //gained 1 item
-                    println("You gained ${enemy.inventory[0]}.");
+                    println("You gained ${enemy.inventory[0].name}.");
                 }else{
                     println("You gained ${enemy.inventory.size} items.")
                 }

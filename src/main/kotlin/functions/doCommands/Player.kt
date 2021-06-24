@@ -176,10 +176,16 @@ private fun commandStats(args: List<String>, plr: Player){
     //You are on the ground floor, in the main hallway.
     println("You are on the $floor, in ${GlobalGameMap.gameMap[cLevel][plr.currentRoom].name}.")
 
+    /* printing emojis doesn't work in cmd nor powershell
     //health: ❤❤❤❤❤❤💔💔💔💔
     val heartCount: Int = Math.round(plr.maxHealth); //amount of hearts to show (maxHealth so it lines up nicely)
     val health: Int = Math.round( (plr.health / plr.maxHealth)* heartCount );
     println("Health: " + "❤".repeat(health) + "\uD83D\uDC94".repeat(heartCount - health) ) //repeat instead of padEnd because the emoijs are too long (bytes)
+    */
+
+    //health: 12%
+    val health = Math.round(plr.health / plr.maxHealth * 100)
+    println("Health: $health%")
 
     //Armor: 12%
     val armor = Math.round(plr.calcArmorPerc() * 100); //*100 to go from 0-1 to 0-100

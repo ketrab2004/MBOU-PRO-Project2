@@ -7,6 +7,10 @@ import kotlin.system.exitProcess
 
 public fun doEnemyAttacks(plr: Player, room: Room){
 
+    if(room.enemyList.size > 0){ //print empty line before enemy attacks if there are enemies
+        println("");
+    }
+
     room.enemyList.forEach{
         val (weapons, _) = getWeapons(it.inventory)
         var weapon: Item? = null;

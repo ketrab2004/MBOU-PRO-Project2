@@ -20,7 +20,7 @@ public fun doEnemyAttacks(plr: Player, room: Room){
         }
 
         val (damage, _) = plr.takeDamage(weapon);
-        println("${it.name} did ${Math.round(damage*10) /10f} to you.")
+        println("${it.name} did ${Math.round(damage*10) /10f} damage to you.")
     }
 
     if (plr.health <= 0){ //TODO make this better ;)

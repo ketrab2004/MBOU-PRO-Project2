@@ -96,7 +96,7 @@ private fun commandAttack(args: List<String>, room: Room, weapon: Item?, plr: Pl
                     println("You defeated all the enemies inside of ${room.name}.")
                 }
             }else{
-                println("You did $damage to ${enemy.name}.")
+                println("You did $damage damage to ${enemy.name}.")
             }
 
             doEnemyAttacks(plr, room); //enemies' turn to attack

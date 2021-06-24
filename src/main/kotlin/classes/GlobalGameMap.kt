@@ -305,7 +305,7 @@ class GlobalGameMap {
                     POI.createContainer("Bat chest", "Chest containing bat stuff.",
                         mutableListOf(
                             Item("Bobman mug", "A black mug with the yellow bobman logo on it.", 1),
-                            Item("Bat cape", "A cape for bats with the bobman logo on it.", 1)
+                            Item.createWearable("Bat cape", "A cape for bats with the bobman logo on it.", ItemArmorSlot.TORSO, .025f)
                         ), "bat"),
 
                     POI.createStaircase("Upwards staircase", "A staircase leading to the 3rd floor.",

@@ -123,7 +123,7 @@ private fun commandExit(args: List<String>){
     val input = readLine()!!.toLowerCase();
 
     if (input == "y" || input == "yes"){
-        println("bye bye :'(")
+        println("\nbye bye :'(")
         exitProcess(0)
     }else{
         println("You typed '${input.toUpperCase()}' which wasn't Y,\nso not closing the game...")

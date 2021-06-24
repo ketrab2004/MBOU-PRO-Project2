@@ -23,11 +23,13 @@ fun main(args: Array<String>) {
 
     println("You, ${player.name}, enter Dracula's castle.")
 
-    println("What will you do? (type help for help)")
+    println("\nWhat will you do? (type help for help)")
 
     while (true){ //game loop
+        print("\n") //new line so everything to do with this command is seperated
+
         if (player.battleMode){
-            print("❗ ") //print a ❗ in front of everything while you are in battle mode
+            print("‼ ") //print a ‼ in front of everything while you are in battle mode
         }
 
         when(player.currentMenu){

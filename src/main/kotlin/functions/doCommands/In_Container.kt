@@ -41,7 +41,7 @@ public fun doCommandIn_Container(input: String, plr: Player, inventory: MutableL
             commandTake(plr, inventory, item); }
 
         else -> {
-            println("⚠️'${arguments[0]}' is not a known command.")
+            println("! '${arguments[0]}' is not a known command.")
         }
     }
 }

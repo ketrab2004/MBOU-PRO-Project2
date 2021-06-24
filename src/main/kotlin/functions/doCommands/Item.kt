@@ -51,7 +51,7 @@ public fun doCommandItem(input: String, item: Item, plr: Player){
 
 
         else -> {
-            println("⚠️'${arguments[0]}' is not a known command.")
+            println("! '${arguments[0]}' is not a known command.")
         }
     }
 }

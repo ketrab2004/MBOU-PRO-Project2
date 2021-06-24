@@ -42,7 +42,7 @@ public fun doCommandIn_Equipment(input: String, plr: Player) {
 
 
             else -> {
-                println("⚠️'${arguments[0]}' is not a known command.")
+                println("! '${arguments[0]}' is not a known command.")
             }
         }
     }else{ //selected item doesn't exist

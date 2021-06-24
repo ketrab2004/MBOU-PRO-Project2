@@ -47,7 +47,7 @@ public fun doCommandIn_Attack(input: String, plr: Player, room: Room, weapon: It
         }
 
         else -> {
-            println("⚠️'${arguments[0]}' is not a known command.")
+            println("! '${arguments[0]}' is not a known command.")
         }
     }
 }

@@ -43,6 +43,10 @@ class GlobalGameMap {
          */
 
         public fun setupGameMap() { //call only once at the beginning (or again for resetting)
+            val bathroomDoor = POI.createDoor("Bathroom door",
+                "It has a sign stating '\uD835\uDCAA\uD835\uDCCA\uD835\uDCC9 \uD835\uDC5C\uD835\uDCBB \uD835\uDCC8\uD835\uDC52\uD835\uDCC7\uD835\uDCCB\uD835\uDCBE\uD835\uDCB8\uD835\uDC52'.",
+                0, "!unlockable")
+
             //region level 0
             //region room0 main room
             var f0mainRoom =
@@ -85,8 +89,7 @@ class GlobalGameMap {
                         ), "Secret Painting 1234"
                     ), POI("Chandelier", "A large chandelier hanging from the ceiling."),
                     POI.createDoor("Living room door", "A door that leads to the living room.", 1, null),
-                    POI.createDoor("Bathroom door", "It has a sign stating '\uD835\uDCAA\uD835\uDCCA\uD835\uDCC9 \uD835\uDC5C\uD835\uDCBB \uD835\uDCC8\uD835\uDC52\uD835\uDCC7\uD835\uDCCB\uD835\uDCBE\uD835\uDCB8\uD835\uDC52'.",
-                        0, "!unlockable"),
+                    bathroomDoor,
                     POI.createDoor("Staircase closet", "A closet under the staircase.", 2, null),
                     POI.createStaircase("Staircase", "A staircase leading to the first floor.", 1, 0, null)
                 )
@@ -143,8 +146,7 @@ class GlobalGameMap {
                     POI.createStaircase("Downwards staircase", "A staircase going back to the ground floor.", 0, 0, null),
                     POI.createDoor("Dining room door", "A door leading to the dining room.", 1, null),
                     POI.createDoor("Kitchen door", "A door leading to the kitchen.", 2, null),
-                    POI.createDoor("Bathroom door", "It has a sign stating '\uD835\uDCAA\uD835\uDCCA\uD835\uDCC9 \uD835\uDC5C\uD835\uDCBB \uD835\uDCC8\uD835\uDC52\uD835\uDCC7\uD835\uDCCB\uD835\uDCBE\uD835\uDCB8\uD835\uDC52'.",
-                        0, "!unlockable"),
+                    bathroomDoor,
                     POI.createDoor("Bat room door", "A door that has a sign above it that says: 'Bat Room'.", 3, null),
                     POI("Chandelier", "A large chandelier hanging from the ceiling."),
                 )
@@ -287,8 +289,7 @@ class GlobalGameMap {
                     POI.createDoor("Bat room door 2", "Another door that leads to another bat room.", 3,null),
 
                     POI("Chandelier", "A large chandelier hanging from the ceiling."),
-                    POI.createDoor("Bathroom door", "It has a sign stating '\uD835\uDCAA\uD835\uDCCA\uD835\uDCC9 \uD835\uDC5C\uD835\uDCBB \uD835\uDCC8\uD835\uDC52\uD835\uDCC7\uD835\uDCCB\uD835\uDCBE\uD835\uDCB8\uD835\uDC52'.",
-                        0, "!unlockable"),
+                    bathroomDoor,
                 )
             )
             //endregion room2
@@ -504,8 +505,7 @@ class GlobalGameMap {
                     POI.createDoor("Chef guest room", "A door leading to where Dracula's chef stays when he's not preparing food.", 3,null),
                     POI.createDoor("Knight guest room", "A door leading to the guest room of a knight.", 4, null),
 
-                    POI.createDoor("Bathroom door", "It has a sign stating '\uD835\uDCAA\uD835\uDCCA\uD835\uDCC9 \uD835\uDC5C\uD835\uDCBB \uD835\uDCC8\uD835\uDC52\uD835\uDCC7\uD835\uDCCB\uD835\uDCBE\uD835\uDCB8\uD835\uDC52'.",
-                        0, "!unlockable"),
+                    bathroomDoor,
                     POI("Chandelier", "A large chandelier hanging from the ceiling."),
 
                     POI.createDoor("Balcony door", "Door leading to the balcony", 5, null),
@@ -762,8 +762,7 @@ class GlobalGameMap {
 
                     POI.createDoor("Dracula's door", "A gigantic double door that leads to Dracula's room.", 0, "dracula"),
 
-                    POI.createDoor("Bathroom door", "It has a sign stating '\uD835\uDCAA\uD835\uDCCA\uD835\uDCC9 \uD835\uDC5C\uD835\uDCBB \uD835\uDCC8\uD835\uDC52\uD835\uDCC7\uD835\uDCCB\uD835\uDCBE\uD835\uDCB8\uD835\uDC52' bummer.",
-                        0, "!unlockable"),
+                    bathroomDoor,
                 )
             )
             //endregion room0 hallway

@@ -29,7 +29,7 @@ fun main(args: Array<String>) {
         print("\n") //new line so everything to do with this command is seperated
 
         if (player.battleMode){
-            print("‼ ") //print a ‼ in front of everything while you are in battle mode
+            print("\u203C ") //print a ‼ in front of everything while you are in battle mode
         }
 
         when(player.currentMenu){

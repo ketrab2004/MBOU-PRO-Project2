@@ -200,7 +200,7 @@ class GlobalGameMap {
 
             //region room3 bat room
             var f1batRoom =
-                Room("", ".")
+                Room("Bat room", "The room where bats are located.")
 
             f1batRoom.poiList.addAll(
                 listOf( //listOf only for the addAll function
@@ -276,7 +276,7 @@ class GlobalGameMap {
 
             //region room2 hallway
             var f2hallway =
-                Room("", ".")
+                Room("Hallway", "The hallway on the 2nd floor.")
 
             f2hallway.poiList.addAll(
                 listOf( //listOf only for the addAll function
@@ -493,7 +493,7 @@ class GlobalGameMap {
             //region level 4
             //region room0 hallway
             var f4hallway =
-                Room("", ".")
+                Room("Hallway", "The hallway on the 4th floor.")
 
             f4hallway.poiList.addAll(
                 listOf( //listOf only for the addAll function

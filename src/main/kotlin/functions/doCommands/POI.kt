@@ -113,7 +113,11 @@ private fun commandEnter(args: List<String>, POI: POI, plr: Player){
                             plr.currentRoom = targetRoom;
                             plr.currentMenu = MenuType.ROOM; //go back to room after entering
 
-                            checkForEnemies(plr) //check for enemies, go into battle mode if there are enemies
+                            val enemiesFound = checkForEnemies(plr) //check for enemies, go into battle mode if there are enemies
+
+                            if (enemiesFound){ //in battle mode you cannot interact with the room, so change menuType
+                                plr.currentMenu = MenuType.NONE;
+                            }
                         }else{
                             println("You unlocked '${POI.name}' and enter.") //unlocked but key is null somehow
 
@@ -128,7 +132,11 @@ private fun commandEnter(args: List<String>, POI: POI, plr: Player){
                             plr.currentRoom = targetRoom;
                             plr.currentMenu = MenuType.ROOM; //go back to room after entering
 
-                            checkForEnemies(plr) //check for enemies, go into battle mode if there are enemies
+                            val enemiesFound = checkForEnemies(plr) //check for enemies, go into battle mode if there are enemies
+
+                            if (enemiesFound){ //in battle mode you cannot interact with the room, so change menuType
+                                plr.currentMenu = MenuType.NONE;
+                            }
                         }
                     } //you don't have a key so don't do anything
                     //(already showed text saying that it's locked)
@@ -145,7 +153,11 @@ private fun commandEnter(args: List<String>, POI: POI, plr: Player){
                     plr.currentRoom = targetRoom;
                     plr.currentMenu = MenuType.ROOM; //go back to room after entering
 
-                    checkForEnemies(plr) //check for enemies, go into battle mode if there are enemies
+                    val enemiesFound = checkForEnemies(plr) //check for enemies, go into battle mode if there are enemies
+
+                    if (enemiesFound){ //in battle mode you cannot interact with the room, so change menuType
+                        plr.currentMenu = MenuType.NONE;
+                    }
                 }
             }else{ //door is not locked (no key set/ islocked not set)
                 print("You are now ")
@@ -159,7 +171,11 @@ private fun commandEnter(args: List<String>, POI: POI, plr: Player){
                 plr.currentRoom = targetRoom;
                 plr.currentMenu = MenuType.ROOM; //go back to room after entering
 
-                checkForEnemies(plr) //check for enemies, go into battle mode if there are enemies
+                val enemiesFound = checkForEnemies(plr) //check for enemies, go into battle mode if there are enemies
+
+                if (enemiesFound){ //in battle mode you cannot interact with the room, so change menuType
+                    plr.currentMenu = MenuType.NONE;
+                }
             }
         } else
         {

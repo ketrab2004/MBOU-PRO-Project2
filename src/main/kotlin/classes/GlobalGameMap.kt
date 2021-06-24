@@ -205,7 +205,7 @@ class GlobalGameMap {
             f1batRoom.poiList.addAll(
                 listOf( //listOf only for the addAll function
                     POI.createDoor("Hallway door", "A door leading back into the hallway.", 0, null),
-                    POI.createStaircase("Upwards staircase", "A staircase leading the the 2nd floor", 1, 0, null),
+                    POI.createStaircase("Upwards staircase", "A staircase leading the the 2nd floor", 2, 0, null),
                     POI("Broken chandelier", "A large chandelier hanging from the ceiling, but it's broken because bats live in darkness."),
                 )
             )

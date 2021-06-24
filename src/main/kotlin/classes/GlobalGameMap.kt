@@ -486,7 +486,7 @@ class GlobalGameMap {
             )
             //endregion room3 utility room
 
-            var level3: List<Room> = listOf(f3hallway) //add rooms level3, !order matters for doors!
+            var level3: List<Room> = listOf(f3hallway, f3study, f3play, f3utility) //add rooms level3, !order matters for doors!
 
             gameMap[3] = level3 //set 3rd floor to level3
             //endregion level 3

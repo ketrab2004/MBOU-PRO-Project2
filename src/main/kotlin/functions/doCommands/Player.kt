@@ -221,7 +221,7 @@ private fun commandAttack(args: List<String>, plr: Player){
         val (weapons, _) = getWeapons(plr.inventory);
         println(formatItemList(weapons, "Weapons"))
         if (weapons.size > 0) {
-            println("Pick your weapon.")
+            println("Pick your weapon. (-1 are your fists)")
 
             plr.currentMenu = MenuType.ATTACK;
         }else{

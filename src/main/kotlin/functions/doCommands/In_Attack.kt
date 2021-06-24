@@ -64,7 +64,7 @@ private fun commandHelp(args: List<String>){
 private fun commandAttack(args: List<String>, room: Room, weapon: Item?, plr: Player){
     var number: Int? = null
 
-    if (args.size > 2){ //if second argument given
+    if (args.size >= 2){ //if second argument given
         number = args[1].toIntOrNull() //convert input to int (or null if not int)
     }
 
@@ -102,11 +102,11 @@ private fun commandAttack(args: List<String>, room: Room, weapon: Item?, plr: Pl
             doEnemyAttacks(plr, room); //enemies' turn to attack
 
         } else {
-            println("You did not pick a valid index of a enemy.")
+            println("You did not pick a valid index of an enemy.")
         }
 
     } else { //is not a number
-        println("You did not pick a index of an enemy to attack.")
+        println("You did not pick an index of an enemy to attack.")
     }
 }
 private fun commandEnemies(room: Room){

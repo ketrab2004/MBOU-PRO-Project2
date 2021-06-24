@@ -62,7 +62,11 @@ private fun commandHelp(args: List<String>){
     println("* back".padEnd(padding)                            +"Return to the previous menu.")
 }
 private fun commandAttack(args: List<String>, room: Room, weapon: Item?, plr: Player){
-    var number: Int? = args[1].toIntOrNull() //convert input to int (or null if not int)
+    var number: Int? = null
+
+    if (args.size > 2){ //if second argument given
+        number = args[1].toIntOrNull() //convert input to int (or null if not int)
+    }
 
     if (room.enemyList.size <= 1){ //if not given number and there is only 1 enemy attack that enemy
         number = 0; }

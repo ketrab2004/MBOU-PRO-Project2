@@ -11,7 +11,8 @@ fun main(args: Array<String>) {
     print("Choose your name: ")
     var player: Player = Player(readLine().toString(), "The player", 10f)
 
-    // region TEMP //TODO remove this!
+    // region TEMP
+    /*
     player.inventory.add(Item.createConsumable("Food", "Tasty", 3, 1f))
     player.inventory.add(Item.createWearable("Helmet", "for your head", ItemArmorSlot.HEAD, .1f))
     player.inventory.add(Item.createKey("Golden key", "Made of gold", "key1"))
@@ -19,6 +20,7 @@ fun main(args: Array<String>) {
     player.inventory.add(Item("Item 4", "bar", 1))
 
     player.health *= .75f; //set health to low
+    */
     // endregion
 
     println("You, ${player.name}, enter Dracula's castle.")

@@ -39,7 +39,7 @@ public fun doCommandInventory(input: String, plr: Player){
         else -> {
             val number: Int? = arguments[0].toIntOrNull() //convert input to int (or null if not int)
             if (number != null) { //is number
-                if (number <= plr.inventory.size && number >= 0) { //chose number in inventory
+                if (number < plr.inventory.size && number >= 0) { //chose number in inventory
 
                     plr.currentMenu = MenuType.IN_INVENTORY;
                     plr.currentMenuIndex = number

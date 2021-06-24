@@ -39,7 +39,7 @@ public fun doCommandEquipment(input: String, plr: Player){
         else -> {
             val number: Int? = arguments[0].toIntOrNull() //convert input to int (or null if not int)
             if (number != null) { //is number
-                if (number <= plr.equipped.size && number >= 0) { //chose number in equipment
+                if (number < plr.equipped.size && number >= 0) { //chose number in equipment
 
                     if (plr.equipped[number] != null) {
                         plr.currentMenu = MenuType.IN_EQUIPMENT; //go into interacting with equipped item

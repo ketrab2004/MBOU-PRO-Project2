@@ -37,7 +37,7 @@ public fun doCommandRoom(input: String, plr: Player){
         else -> {
             val number: Int? = arguments[0].toIntOrNull() //convert input to int (or null if not int)
             if (number != null) { //is number
-                if (number <= room.poiList.size && number >= 0) { //chose number in inventory
+                if (number < room.poiList.size && number >= 0) { //chose number in inventory
 
                     plr.currentMenu = MenuType.IN_ROOM;
                     plr.currentMenuIndex = number

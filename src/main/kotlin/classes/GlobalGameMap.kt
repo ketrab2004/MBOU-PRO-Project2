@@ -44,7 +44,7 @@ class GlobalGameMap {
 
         public fun setupGameMap() { //call only once at the beginning (or again for resetting)
             val bathroomDoor = POI.createDoor("Bathroom door",
-                "It has a sign stating '\uD835\uDCAA\uD835\uDCCA\uD835\uDCC9 \uD835\uDC5C\uD835\uDCBB \uD835\uDCC8\uD835\uDC52\uD835\uDCC7\uD835\uDCCB\uD835\uDCBE\uD835\uDCB8\uD835\uDC52'.",
+                "It has a sign stating 'Out of service'.",
                 0, "!unlockable")
 
             //region level 0

@@ -52,7 +52,7 @@ public fun doCommandAttack(input: String, plr: Player){
         else -> {
             val number: Int? = arguments[0].toIntOrNull() //convert input to int (or null if not int)
             if (number != null) { //is number
-                if (number <= weapons.size && number >= -1) { //chose number in inventory
+                if (number < weapons.size && number >= -1) { //chose number in inventory
 
                     plr.currentMenu = MenuType.IN_ATTACK;
 

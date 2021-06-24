@@ -111,7 +111,7 @@ private fun commandEnter(args: List<String>, POI: POI, plr: Player){
                             print("in ${GlobalGameMap.gameMap[plr.currentLevel][targetRoom].name}.\n")
 
                             plr.currentRoom = targetRoom;
-                            plr.currentMenu = MenuType.NONE; //go back after entering
+                            plr.currentMenu = MenuType.ROOM; //go back to room after entering
 
                             checkForEnemies(plr) //check for enemies, go into battle mode if there are enemies
                         }else{
@@ -126,7 +126,7 @@ private fun commandEnter(args: List<String>, POI: POI, plr: Player){
                             print("in ${GlobalGameMap.gameMap[plr.currentLevel][targetRoom].name}.\n")
 
                             plr.currentRoom = targetRoom;
-                            plr.currentMenu = MenuType.NONE; //go back after entering
+                            plr.currentMenu = MenuType.ROOM; //go back to room after entering
 
                             checkForEnemies(plr) //check for enemies, go into battle mode if there are enemies
                         }
@@ -143,7 +143,7 @@ private fun commandEnter(args: List<String>, POI: POI, plr: Player){
                     print("in ${GlobalGameMap.gameMap[plr.currentLevel][targetRoom].name}.\n")
 
                     plr.currentRoom = targetRoom;
-                    plr.currentMenu = MenuType.NONE; //go back after entering
+                    plr.currentMenu = MenuType.ROOM; //go back to room after entering
 
                     checkForEnemies(plr) //check for enemies, go into battle mode if there are enemies
                 }
@@ -157,7 +157,7 @@ private fun commandEnter(args: List<String>, POI: POI, plr: Player){
                 print("in ${GlobalGameMap.gameMap[plr.currentLevel][targetRoom].name}.\n")
 
                 plr.currentRoom = targetRoom;
-                plr.currentMenu = MenuType.NONE; //go back after entering
+                plr.currentMenu = MenuType.ROOM; //go back to room after entering
 
                 checkForEnemies(plr) //check for enemies, go into battle mode if there are enemies
             }

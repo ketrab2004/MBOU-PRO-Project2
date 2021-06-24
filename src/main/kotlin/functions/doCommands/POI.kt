@@ -185,16 +185,20 @@ private fun commandOpen(args: List<String>, POI: POI, plr: Player){
                         if (key != null){
                             println("You unlocked '${POI.name}' using '${key.name}'.")
 
-                            plr.currentMenu = MenuType.CONTAINER;
-                            //currentMenuIndex doesn't change
+                            if (content.size > 0) {
+                                plr.currentMenu = MenuType.CONTAINER;
+                                //currentMenuIndex doesn't change
+                            }
 
                             @Suppress("UNCHECKED_CAST") //intelij :)
                             println(formatItemList(content as List<Item>, POI.name));
                         }else{
                             println("You unlocked '${POI.name}'.") //unlocked but key is null somehow
 
-                            plr.currentMenu = MenuType.CONTAINER;
-                            //currentMenuIndex doesn't change
+                            if (content.size > 0) {
+                                plr.currentMenu = MenuType.CONTAINER;
+                                //currentMenuIndex doesn't change
+                            }
 
                             @Suppress("UNCHECKED_CAST") //intelij :)
                             println(formatItemList(content as List<Item>, POI.name));
@@ -202,15 +206,19 @@ private fun commandOpen(args: List<String>, POI: POI, plr: Player){
                     } //you don't have a key so don't do anything
 
                 } else { //container is not locked
-                    plr.currentMenu = MenuType.CONTAINER;
-                    //currentMenuIndex doesn't change
+                    if (content.size > 0) {
+                        plr.currentMenu = MenuType.CONTAINER;
+                        //currentMenuIndex doesn't change
+                    }
 
                     @Suppress("UNCHECKED_CAST") //intelij :)
                     println(formatItemList(content as List<Item>, POI.name));
                 }
             } else { //container does not have a isLocked var
-                plr.currentMenu = MenuType.CONTAINER;
-                //currentMenuIndex doesn't change
+                if (content.size > 0) {
+                    plr.currentMenu = MenuType.CONTAINER;
+                    //currentMenuIndex doesn't change
+                }
 
                 @Suppress("UNCHECKED_CAST") //intelij :)
                 println(formatItemList(content as List<Item>, POI.name));
